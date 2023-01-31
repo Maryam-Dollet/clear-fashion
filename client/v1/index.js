@@ -548,3 +548,7 @@ console.log(jacket);
 // 1. Save MY_FAVORITE_BRANDS in the localStorage
 // 2. log the localStorage
 
+console.log(MY_FAVORITE_BRANDS);
+
+const jsonArray = JSON.stringify(MY_FAVORITE_BRANDS);
+localStorage.setItem('favorite_brands', jsonArray);
