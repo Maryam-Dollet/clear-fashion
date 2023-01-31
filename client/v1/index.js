@@ -36,7 +36,7 @@ console.log(MY_FAVORITE_BRANDS[0]);
 // 2. Log the variable
 
 var cheapestTShirt = 'https://www.faguo-store.com/fr/vetements/7606-arcy-t-shirt-en-coton-recycle-kaki.html';
-console.log("The cheapest T-Shirt is "+cheapestTShirt)
+console.log("The cheapest T-Shirt is "+cheapestTShirt);
 
 /**
  * 👕
@@ -72,7 +72,7 @@ console.log(brandnames.size);
 // 2. Create a variable and assign it the list of products by price from lowest to highest
 // 3. Log the variable
 
-var sorted_marketplace = marketplace
+const sorted_marketplace = [...marketplace];
 
 sorted_marketplace.sort(function(a,b) {
   return b.price - a.price
@@ -85,7 +85,8 @@ console.log(sorted_marketplace.reverse())
 // 2. Create a variable and assign it the list of products by date from recent to old
 // 3. Log the variable
 
-var sorted_marketplace2 = marketplace
+
+const sorted_marketplace2 = marketplace.slice();
 
 sorted_marketplace2.sort(function(a,b) {
   var date1 = new Date(a.released);
@@ -146,9 +147,23 @@ console.log("The average price is : " + averagem())
 // 2. Log the variable
 // 3. Log the number of products by brands
 
+const convertArrayToObject = (array, key) => {
+  const brands = {};
+  return array.reduce((obj, item) => {
+    return {
+      ...obj,
+      [item[key]]: item,
+    };
+  }, brands);
+};
+
+console.log(convertArrayToObject(marketplace, 'brand'));
+
 // 🎯 TODO 9: Sort by price for each brand
 // 1. For each brand, sort the products by price, from highest to lowest
 // 2. Log the sort
+
+
 
 // 🎯 TODO 10: Sort by date for each brand
 // 1. For each brand, sort the products by date, from old to recent
