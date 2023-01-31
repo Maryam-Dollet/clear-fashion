@@ -453,9 +453,27 @@ COTELE_PARIS.forEach(function(item){
 // // 1. Log if coteleparis is a reasonable price shop (true or false)
 // // A reasonable price if all the products are less than 100€
 
+var sum = 0;
+
+COTELE_PARIS.forEach(function(item){
+  if (item.price < 100){
+    sum ++;
+  }
+})
+
+if(sum == COTELE_PARIS.length){
+  console.log("conteleparis is a reasonalble price shop : " + true);
+}
+else{
+  console.log("conteleparis is a reasonalble price shop : " + false);
+}
+
 // 🎯 TODO 3: Find a specific product
 // 1. Find the product with the uuid `2b9a47e3-ed73-52f6-8b91-379e9c8e526c`
 // 2. Log the product
+
+var result = COTELE_PARIS.find(item => item.uuid === '2b9a47e3-ed73-52f6-8b91-379e9c8e526c');
+console.log(result);
 
 // 🎯 TODO 4: Delete a specific product
 // 1. Delete the product with the uuid `2b9a47e3-ed73-52f6-8b91-379e9c8e526c`
