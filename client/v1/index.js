@@ -154,7 +154,7 @@ for (const key of brandnames) {
 }
 
 marketplace.forEach(function(item){
-  
+  brands[item.brand].push(item)
 });
 
 console.log(brands);
@@ -163,7 +163,6 @@ console.log(brands);
 // 1. For each brand, sort the products by price, from highest to lowest
 // 2. Log the sort
  
-
 
 
 // 🎯 TODO 10: Sort by date for each brand
