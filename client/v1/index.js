@@ -85,11 +85,29 @@ console.log(sorted_marketplace.reverse())
 // 2. Create a variable and assign it the list of products by date from recent to old
 // 3. Log the variable
 
+var sorted_marketplace2 = marketplace
 
+sorted_marketplace2.sort(function(a,b) {
+  var date1 = new Date(a.released);
+  var date2 = new Date(b.released);
+  return date1 - date2;
+});
+
+console.log(sorted_marketplace2.reverse());
 
 // 🎯 TODO 6: Filter a specific price range
 // 1. Filter the list of products between 50€ and 100€
 // 2. Log the list
+
+var filtered_marketplace = [];
+
+marketplace.forEach(function(item){
+  if (item.price > 50 && item.price < 100){
+    filtered_marketplace.push(item);
+  }
+});
+
+console.log(filtered_marketplace);
 
 // 🎯 TODO 7: Average price
 // 1. Determine the average price of the marketplace
