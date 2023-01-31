@@ -178,7 +178,18 @@ console.log(sorted_brands);
 // 1. For each brand, sort the products by date, from old to recent
 // 2. Log the sort
 
+const sorted_brands2= {...brands}
 
+for (const key of brandnames){
+  sorted_brands2[key].sort(function(a,b) {
+    var date1 = new Date(a.released);
+    var date2 = new Date(b.released);
+    return date1 - date2;
+  });
+  sorted_brands2[key].reverse();
+}
+
+console.log(sorted_brands2);
 
 /**
  * 💶
