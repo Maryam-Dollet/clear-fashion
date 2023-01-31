@@ -147,21 +147,22 @@ console.log("The average price is : " + averagem())
 // 2. Log the variable
 // 3. Log the number of products by brands
 
-const convertArrayToObject = (array, key) => {
-  const brands = {};
-  return array.reduce((obj, item) => {
-    return {
-      ...obj,
-      [item[key]]: item,
-    };
-  }, brands);
-};
+var brands = {}
 
-console.log(convertArrayToObject(marketplace, 'brand'));
+for (const key of brandnames) {
+  brands[key] = [];
+}
+
+marketplace.forEach(function(item){
+  
+});
+
+console.log(brands);
 
 // 🎯 TODO 9: Sort by price for each brand
 // 1. For each brand, sort the products by price, from highest to lowest
 // 2. Log the sort
+ 
 
 
 
