@@ -511,6 +511,10 @@ jacket.favorite = true;
 // 1. Log `blueJacket` and `jacket` variables
 // 2. What do you notice?
 
+console.log(blueJacket);
+console.log(jacket);
+console.log("Both have favorite set to true, only jacket is supposed to be true");
+
 // we make a new assignment again
 blueJacket = {
   'link':
@@ -524,7 +528,15 @@ blueJacket = {
   'released': '2022-08-15'
 };
 
+
 // 3. Update `jacket` property with `favorite` to true WITHOUT changing blueJacket properties
+
+//jacket = {...blueJacket};
+jacket = JSON.parse(JSON.stringify(blueJacket));
+jacket.favorite = true;
+
+console.log(blueJacket);
+console.log(jacket);
 
 /**
  * 🎬
@@ -535,3 +547,4 @@ blueJacket = {
 // 🎯 LAST TODO: Save in localStorage
 // 1. Save MY_FAVORITE_BRANDS in the localStorage
 // 2. log the localStorage
+
