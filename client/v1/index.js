@@ -78,7 +78,7 @@ sorted_marketplace.sort(function(a,b) {
   return b.price - a.price
 });
 
-console.log(sorted_marketplace.reverse())
+console.table(sorted_marketplace.reverse())
 
 // 🎯 TODO 5: Sort by date
 // 1. Create a function to sort the marketplace objects by products date
@@ -94,7 +94,7 @@ sorted_marketplace2.sort(function(a,b) {
   return date1 - date2;
 });
 
-console.log(sorted_marketplace2.reverse());
+console.table(sorted_marketplace2.reverse());
 
 // 🎯 TODO 6: Filter a specific price range
 // 1. Filter the list of products between 50€ and 100€
@@ -108,7 +108,7 @@ marketplace.forEach(function(item){
   }
 });
 
-console.log(filtered_marketplace);
+console.table(filtered_marketplace);
 
 // 🎯 TODO 7: Average price
 // 1. Determine the average price of the marketplace
@@ -173,7 +173,10 @@ for (const key of brandnames){
   sorted_brands[key].reverse();
 }
 
-console.log(sorted_brands);
+console.log(sorted_brands)
+console.table(sorted_brands['hast']);
+console.table(sorted_brands['loom']);
+console.table(sorted_brands['panafrica']);
 
 // 🎯 TODO 10: Sort by date for each brand
 // 1. For each brand, sort the products by date, from old to recent
@@ -190,7 +193,10 @@ for (const key of brandnames){
   sorted_brands2[key].reverse();
 }
 
-console.log(sorted_brands2);
+console.log(sorted_brands2)
+console.table(sorted_brands2['hast']);
+console.table(sorted_brands2['loom']);
+console.table(sorted_brands2['panafrica']);
 
 /**
  * 💶
@@ -473,7 +479,7 @@ else{
 // 2. Log the product
 
 var result = COTELE_PARIS.find(item => item.uuid === '2b9a47e3-ed73-52f6-8b91-379e9c8e526c');
-console.log(result);
+console.table(result);
 
 // 🎯 TODO 4: Delete a specific product
 // 1. Delete the product with the uuid `2b9a47e3-ed73-52f6-8b91-379e9c8e526c`
@@ -487,6 +493,8 @@ clone_cotele = clone_cotele.filter(function(obj){
 
 var result = clone_cotele.find(item => item.uuid === '2b9a47e3-ed73-52f6-8b91-379e9c8e526c');
 console.log(result);
+
+console.log("The result is undefined which means the object was deleted")
 
 // 🎯 TODO 5: Save the favorite product
 // We declare and assign a variable called `blueJacket`
@@ -511,8 +519,8 @@ jacket.favorite = true;
 // 1. Log `blueJacket` and `jacket` variables
 // 2. What do you notice?
 
-console.log(blueJacket);
-console.log(jacket);
+console.table(blueJacket);
+console.table(jacket);
 console.log("Both have favorite set to true, only jacket is supposed to be true");
 
 // we make a new assignment again
@@ -535,8 +543,8 @@ blueJacket = {
 jacket = JSON.parse(JSON.stringify(blueJacket));
 jacket.favorite = true;
 
-console.log(blueJacket);
-console.log(jacket);
+console.table(blueJacket);
+console.table(jacket);
 
 /**
  * 🎬
@@ -548,7 +556,7 @@ console.log(jacket);
 // 1. Save MY_FAVORITE_BRANDS in the localStorage
 // 2. log the localStorage
 
-console.log(MY_FAVORITE_BRANDS);
+//console.log(MY_FAVORITE_BRANDS);
 
 const jsonArray = JSON.stringify(MY_FAVORITE_BRANDS);
 localStorage.setItem('favorite_brands', jsonArray);
