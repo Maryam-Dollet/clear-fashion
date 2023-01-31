@@ -113,6 +113,16 @@ console.log(filtered_marketplace);
 // 1. Determine the average price of the marketplace
 // 2. Log the average
 
+function averagem(){
+  var sum = 0;
+  marketplace.forEach(function(item){
+    sum = sum + item.price;
+  });
+  return sum/marketplace.length;
+}
+
+console.log("The average price is : " + averagem())
+
 /**
  * 🏎
  * We are almost done with the `marketplace` variable
