@@ -163,7 +163,8 @@ console.log(brands);
 // 1. For each brand, sort the products by price, from highest to lowest
 // 2. Log the sort
  
-const sorted_brands= {...brands}
+const sorted_brands = JSON.parse(JSON.stringify(brands));
+
 
 for (const key of brandnames){
   sorted_brands[key].sort(function(a,b) {
@@ -178,7 +179,7 @@ console.log(sorted_brands);
 // 1. For each brand, sort the products by date, from old to recent
 // 2. Log the sort
 
-const sorted_brands2= {...brands}
+const sorted_brands2 = JSON.parse(JSON.stringify(brands));
 
 for (const key of brandnames){
   sorted_brands2[key].sort(function(a,b) {
@@ -201,6 +202,51 @@ console.log(sorted_brands2);
 // 🎯 TODO 11: Compute the p90 price value
 // 1. Compute the p90 price value of each brand
 // The p90 value (90th percentile) is the lower value expected to be exceeded in 90% of the products
+
+/*
+function p90_value2(q){
+  const pObj = {};
+  for (const item of brandnames){
+    var pos = ((sorted_brands[item].length)-1)*q;
+    var base = Math.floor(pos);
+    var rest = pos - base;
+    if ((sorted_brands[item][base+1].price !== undefined)){
+      pObj[item] = sorted_brands[item][base].price + rest * (sorted_brands[item][base+1].price-sorted_brands[item][base].price);
+    }
+    else{
+      pObj[item] = sorted_brands[item][base].price
+    }
+  }
+}
+*/
+
+function p90_value(q){
+  const pObj = {};
+  for (const item of brandnames){
+
+    var temparray = [];
+    sorted_brands[item].forEach(function(obj){
+      temparray.push(obj.price)
+    });
+    q = q/100;
+    var pos = ((temparray.length)-1)*q;
+    var base = Math.floor(pos);
+    var rest = pos - base;
+
+    if ((temparray[base+1] !== undefined)){
+      pObj[item] = temparray[base] + rest * (temparray[base+1]-temparray[base]);
+    }
+    else{
+      pObj[item] =  temparray[base];
+    }
+  }
+  return pObj;
+}
+
+//console.log(sorted_brands['loom'][1]);
+//console.log(sorted_brands['loom'][1].price);
+
+console.log(p90_value(90));
 
 /**
  * 🧥
