@@ -479,6 +479,15 @@ console.log(result);
 // 1. Delete the product with the uuid `2b9a47e3-ed73-52f6-8b91-379e9c8e526c`
 // 2. Log the new list of product
 
+var clone_cotele = [...COTELE_PARIS];
+
+clone_cotele = clone_cotele.filter(function(obj){
+  return obj.uuid !== '2b9a47e3-ed73-52f6-8b91-379e9c8e526c';
+});
+
+var result = clone_cotele.find(item => item.uuid === '2b9a47e3-ed73-52f6-8b91-379e9c8e526c');
+console.log(result);
+
 // 🎯 TODO 5: Save the favorite product
 // We declare and assign a variable called `blueJacket`
 let blueJacket = {
