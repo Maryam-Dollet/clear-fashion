@@ -67,6 +67,12 @@ marketplace.forEach(function(item){
 console.log(brandnames);
 console.log(brandnames.size);
 
+// 2nd method
+
+const unique = [... new Set(marketplace.map((item) => item.brand))];
+console.log(unique)
+console.log(unique.length)
+
 // 🎯 TODO 4: Sort by price
 // 1. Create a function to sort the marketplace products by price
 // 2. Create a variable and assign it the list of products by price from lowest to highest
