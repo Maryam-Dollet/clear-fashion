@@ -135,6 +135,7 @@ const renderPagination = pagination => {
 const renderBrands = brand => {
   const options = Array.from(brand, x => `<option value="${x}">${x}</option>`);
   selectBrand.innerHTML = options;
+  numberOfBrands.innerHTML = brand.length - 1;
 };
 
 /**
@@ -188,12 +189,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   const products = await fetchProducts();
   const brands = await fetchBrands();
 
-  numberOfBrands.innerHTML = brands.length;
-
   setCurrentBrands(brands);
   setCurrentProducts(products);
-  renderBrands(brands);
 
+  renderBrands(brands);
   render(currentProducts, currentPagination);
 
 });
