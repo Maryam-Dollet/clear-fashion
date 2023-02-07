@@ -107,6 +107,10 @@ const renderProducts = products => {
   sectionProducts.appendChild(fragment);
 };
 
+const filterProductsBrand = products => {
+
+};
+
 /**
  * Render page selector
  * @param  {Object} pagination
@@ -123,14 +127,8 @@ const renderPagination = pagination => {
 };
 
 const renderBrands = brand => {
-  const {currentBrand} = brand
-  const options = Array.from(
-    {'length': currentBrand},
-    (value, index) => `<option value="${index + 1}">${value}</option>`
-  ).join('');
-
+  const options = Array.from(brand, x => `<option value="${x}">${x}</option>`);
   selectBrand.innerHTML = options;
-  selectBrand.selectedIndex = currentBrand - 1
 };
 
 /**
