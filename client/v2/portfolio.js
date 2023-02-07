@@ -24,6 +24,8 @@ const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
 const selectBrand = document.querySelector('#brand-select');
 
+var numberOfBrands = document.getElementById("nbBrands");
+
 /**
  * Set global value
  * @param {Array} result - products to display
@@ -186,9 +188,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   const products = await fetchProducts();
   const brands = await fetchBrands();
 
+  numberOfBrands.innerHTML = brands.length;
+
   setCurrentBrands(brands);
   setCurrentProducts(products);
-  renderBrands(currentBrands)
+  renderBrands(brands);
 
   render(currentProducts, currentPagination);
 
