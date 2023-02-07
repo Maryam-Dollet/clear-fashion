@@ -108,7 +108,8 @@ const renderProducts = products => {
 };
 
 const filterProductsBrand = products => {
-
+    const filteredprods = products.filter(product => product.brand = selectBrand);
+    return filteredprods;
 };
 
 /**
@@ -127,6 +128,7 @@ const renderPagination = pagination => {
 };
 
 const renderBrands = brand => {
+  brand.unshift("")
   const options = Array.from(brand, x => `<option value="${x}">${x}</option>`);
   selectBrand.innerHTML = options;
 };
@@ -175,5 +177,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   setCurrentBrands(brands);
   setCurrentProducts(products);
-  render(currentProducts, currentPagination, currentBrands);
+  
+  if (selectBrand != ""){
+    render(filterProductsBrand(currentProducts), currentPagination, currentBrands);
+  }
+  else {
+    render(currentProducts, currentPagination, currentBrands);
+  }
+  
+  //render(currentProducts, currentPagination, currentBrands);
 });
