@@ -35,7 +35,8 @@ const setCurrentProducts = ({result, meta}) => {
 };
 
 const setCurrentBrands = (result) => {
-  currentBrands = result
+  result.unshift("");
+  currentBrands = result;
 }
 
 /**
@@ -108,7 +109,9 @@ const renderProducts = products => {
 };
 
 const filterProductsBrand = products => {
-    const filteredprods = products.filter(product => product.brand = selectBrand);
+    const filteredprods = products.filter(function(product){
+      return product.brand == selectBrand.value;
+    });
     return filteredprods;
 };
 
@@ -128,7 +131,6 @@ const renderPagination = pagination => {
 };
 
 const renderBrands = brand => {
-  brand.unshift("")
   const options = Array.from(brand, x => `<option value="${x}">${x}</option>`);
   selectBrand.innerHTML = options;
 };
@@ -161,14 +163,21 @@ selectShow.addEventListener('change', async (event) => {
   const products = await fetchProducts(currentPagination.currentPage, parseInt(event.target.value));
 
   setCurrentProducts(products);
-  render(currentProducts, currentPagination);
+  render(currentProducts, currentPagination, currentBrands);
 });
 
 selectPage.addEventListener('change', async (event) => {
   const products = await fetchProducts(parseInt(event.target.value), currentPagination.pageSize);
 
   setCurrentProducts(products);
-  render(currentProducts, currentPagination);
+  render(currentProducts, currentPagination, currentBrands);
+});
+
+selectBrand.addEventListener('change', async(event) =>{
+  if (String(event.target.value) != ""){
+    alert(String(event.target.value));
+    render(filterProductsBrand(currentProducts), currentPagination, currentBrands)
+  }
 });
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -177,13 +186,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   setCurrentBrands(brands);
   setCurrentProducts(products);
-  
-  if (selectBrand != ""){
-    render(filterProductsBrand(currentProducts), currentPagination, currentBrands);
-  }
-  else {
-    render(currentProducts, currentPagination, currentBrands);
-  }
-  
-  //render(currentProducts, currentPagination, currentBrands);
+
+  render(currentProducts, currentPagination, currentBrands);
+
 });
