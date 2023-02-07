@@ -145,11 +145,10 @@ const renderIndicators = pagination => {
   spanNbProducts.innerHTML = count;
 };
 
-const render = (products, pagination, brand) => {
+const render = (products, pagination) => {
   renderProducts(products);
   renderPagination(pagination);
   renderIndicators(pagination);
-  renderBrands(brand)
 };
 
 /**
@@ -163,20 +162,23 @@ selectShow.addEventListener('change', async (event) => {
   const products = await fetchProducts(currentPagination.currentPage, parseInt(event.target.value));
 
   setCurrentProducts(products);
-  render(currentProducts, currentPagination, currentBrands);
+  render(currentProducts, currentPagination);
 });
 
 selectPage.addEventListener('change', async (event) => {
   const products = await fetchProducts(parseInt(event.target.value), currentPagination.pageSize);
 
   setCurrentProducts(products);
-  render(currentProducts, currentPagination, currentBrands);
+  render(currentProducts, currentPagination);
 });
 
 selectBrand.addEventListener('change', async(event) =>{
   if (String(event.target.value) != ""){
-    alert(String(event.target.value));
-    render(filterProductsBrand(currentProducts), currentPagination, currentBrands)
+    //alert(String(event.target.value));
+    render(filterProductsBrand(currentProducts), currentPagination)
+  }
+  else{
+    render(currentProducts, currentPagination)
   }
 });
 
@@ -186,7 +188,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   setCurrentBrands(brands);
   setCurrentProducts(products);
+  renderBrands(currentBrands)
 
-  render(currentProducts, currentPagination, currentBrands);
+  render(currentProducts, currentPagination);
 
 });
