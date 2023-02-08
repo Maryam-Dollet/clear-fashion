@@ -16,6 +16,7 @@ Search for available brands list
 let currentProducts = [];
 let currentPagination = {};
 let currentBrands = [];
+
 let tempbrand;
 
 // instantiate the selectors
@@ -116,8 +117,12 @@ const renderProducts = products => {
 };
 
 const filterProductsBrand = (products, tbrand) => {
-    const filteredprods = products.filter( product => product.brand == tbrand);
-    return filteredprods;
+  const filteredprods = products.filter( product => product.brand == tbrand);
+  return filteredprods;
+};
+
+const filterReasonableProducts = (products) =>{
+
 };
 
 const filterRecentProducts = products => {
@@ -204,6 +209,25 @@ selectBrand.addEventListener('change', async(event) =>{
   else{
     tempbrand = "";
     render(currentProducts, currentPagination);
+  }
+});
+
+selectReasonable.addEventListener('change', async(event) =>{
+  if (event.target.value == "Yes"){
+
+  }
+  else {
+
+  }
+
+});
+
+selectRecently.addEventListener('change', async(event)  =>{
+  if (event.target.value == "Yes"){
+
+  }
+  else {
+    
   }
 });
 
