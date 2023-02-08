@@ -34,6 +34,7 @@ var numberOfBrands = document.getElementById("nbBrands");
 const setCurrentProducts = ({result, meta}) => {
   currentProducts = result;
   currentPagination = meta;
+  currentPagination.brand = "";
 };
 
 const setCurrentBrands = (result) => {
@@ -111,10 +112,13 @@ const renderProducts = products => {
 };
 
 const filterProductsBrand = products => {
-    const filteredprods = products.filter(function(product){
-      return product.brand == selectBrand.value;
-    });
+    const filteredprods = products.filter( product => product.brand == selectBrand.value);
     return filteredprods;
+};
+
+const filterRecentProducts = products => {
+  const filteredprods = 0;
+  return filteredprods;
 };
 
 /**
@@ -176,12 +180,14 @@ selectPage.addEventListener('change', async (event) => {
 });
 
 selectBrand.addEventListener('change', async(event) =>{
-  if (String(event.target.value) != ""){
-    //alert(String(event.target.value));
-    render(filterProductsBrand(currentProducts), currentPagination)
+  if (event.target.value != ""){
+    alert(event.target.value);
+    currentPagination.brand = event.target.value;
+    render(filterProductsBrand(currentProducts), currentPagination);
   }
   else{
-    render(currentProducts, currentPagination)
+    currentPagination.brand = event.target.value;
+    render(currentProducts, currentPagination);
   }
 });
 
