@@ -36,7 +36,10 @@ const selectRecently = document.querySelector('#recently-released')
 const sortSelect = document.querySelector('#sort-select');
 
 var numberOfBrands = document.getElementById("nbBrands");
-var numberOfRecent = document.getElementById("nbNewProds")
+var numberOfRecent = document.getElementById("nbNewProds");
+var p50 = document.getElementById("p50");
+var p90 = document.getElementById("p90");
+var p95 = document.getElementById("p95");
 
 /**
  * Set global value
@@ -199,24 +202,27 @@ const getRecentProducts = async () => {
   numberOfRecent.innerHTML = prods.result.length;
 };
 
-function p_value(products, q){
+const p_value = (products, q) => {
+  var pvalue
   q = q/100;
   var pos = ((products.length)-1)*q;
   var base = Math.floor(pos);
   var rest = pos - base;
 
   if ((products[base+1].price !== undefined)){
-    pObj = products[base].price + rest * (products[base+1].price-products[base].price);
+    pvalue = products[base].price + rest * (products[base+1].price-products[base].price);
   }
   else{
-    pObj =  products[base].price;
+    pvalue =  products[base].price;
   }
-  return pObj;
+  return Math.round(pvalue * 100) / 100;
 }
 
 const Pvalues = async() =>{
   const prods = await fetchProducts(1,currentPagination.count);
-  
+  p50.innerHTML = p_value(prods.result, 50);
+  p90.innerHTML = p_value(prods.result, 90);
+  p95.innerHTML = p_value(prods.result, 95);
 }
 
 /**
@@ -427,6 +433,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   renderBrands(brands);
   getRecentProducts();
+  Pvalues()
   render(currentProducts, currentPagination);
 
 });
