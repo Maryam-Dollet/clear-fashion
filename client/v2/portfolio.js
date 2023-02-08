@@ -193,14 +193,30 @@ const sortByDate = products => {
 
 // number ofs
 
-const getRecentProducts = () => {
-  const prods = fetchProducts(1, 222);
+const getRecentProducts = async () => {
+  const prods = await fetchProducts(1, currentPagination.count);
   prods.result = filterRecentProducts(prods.result)
-  numberOfRecent.innerHTML = prods.result.lenght;
+  numberOfRecent.innerHTML = prods.result.length;
 };
 
-const Pvalues = () =>{
+function p_value(products, q){
+  q = q/100;
+  var pos = ((products.length)-1)*q;
+  var base = Math.floor(pos);
+  var rest = pos - base;
 
+  if ((products[base+1].price !== undefined)){
+    pObj = products[base].price + rest * (products[base+1].price-products[base].price);
+  }
+  else{
+    pObj =  products[base].price;
+  }
+  return pObj;
+}
+
+const Pvalues = async() =>{
+  const prods = await fetchProducts(1,currentPagination.count);
+  
 }
 
 /**
