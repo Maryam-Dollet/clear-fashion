@@ -16,6 +16,7 @@ Search for available brands list
 let currentProducts = [];
 let currentPagination = {};
 let currentBrands = [];
+let tempbrand;
 
 // instantiate the selectors
 const selectShow = document.querySelector('#show-select');
@@ -23,6 +24,9 @@ const selectPage = document.querySelector('#page-select');
 const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
 const selectBrand = document.querySelector('#brand-select');
+
+const selectReasonable = document.querySelector('#reasonable-price')
+const selectRecently = document.querySelector('#recently-released')
 
 var numberOfBrands = document.getElementById("nbBrands");
 
@@ -111,8 +115,8 @@ const renderProducts = products => {
   sectionProducts.appendChild(fragment);
 };
 
-const filterProductsBrand = products => {
-    const filteredprods = products.filter( product => product.brand == selectBrand.value);
+const filterProductsBrand = (products, tbrand) => {
+    const filteredprods = products.filter( product => product.brand == tbrand);
     return filteredprods;
 };
 
@@ -169,24 +173,36 @@ selectShow.addEventListener('change', async (event) => {
   const products = await fetchProducts(currentPagination.currentPage, parseInt(event.target.value));
 
   setCurrentProducts(products);
-  render(currentProducts, currentPagination);
+  if (tempbrand != ""){
+    render(filterProductsBrand(currentProducts,tempbrand), currentPagination)
+  }
+  else{
+    tempbrand = "";
+    render(currentProducts, currentPagination);
+  }
 });
 
 selectPage.addEventListener('change', async (event) => {
   const products = await fetchProducts(parseInt(event.target.value), currentPagination.pageSize);
 
   setCurrentProducts(products);
-  render(currentProducts, currentPagination);
+  if (tempbrand != ""){
+    render(filterProductsBrand(currentProducts,tempbrand), currentPagination)
+  }
+  else{
+    tempbrand = "";
+    render(currentProducts, currentPagination);
+  }
 });
 
 selectBrand.addEventListener('change', async(event) =>{
   if (event.target.value != ""){
-    alert(event.target.value);
-    currentPagination.brand = event.target.value;
-    render(filterProductsBrand(currentProducts), currentPagination);
+    //alert(event.target.value);
+    tempbrand = event.target.value;
+    render(filterProductsBrand(currentProducts,tempbrand), currentPagination);
   }
   else{
-    currentPagination.brand = event.target.value;
+    tempbrand = "";
     render(currentProducts, currentPagination);
   }
 });
