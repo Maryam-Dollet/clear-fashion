@@ -40,6 +40,7 @@ var numberOfRecent = document.getElementById("nbNewProds");
 var p50 = document.getElementById("p50");
 var p90 = document.getElementById("p90");
 var p95 = document.getElementById("p95");
+var recentDate = document.getElementById("recent-date");
 
 /**
  * Set global value
@@ -227,7 +228,8 @@ const Pvalues = async() =>{
 
 const getMostRecentdate = async() => {
   const prods = await fetchProducts(1,currentPagination.count);
-  
+  var date = sortByDate(prods.result).reverse()[0].released;
+  recentDate.innerHTML = date;
 }
 
 /**
@@ -438,7 +440,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   renderBrands(brands);
   getRecentProducts();
-  Pvalues()
+  Pvalues();
+  getMostRecentdate();
   render(currentProducts, currentPagination);
 
 });
