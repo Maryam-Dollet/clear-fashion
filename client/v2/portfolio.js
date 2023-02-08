@@ -117,6 +117,8 @@ const renderProducts = products => {
         <a href="${product.link}" target="_blank" rel="noopener noreferrer">${product.name}</a>
         <span>${product.price}</span>
         <span> <FONT COLOR="#ff0000"> ${product.released}</FONT> </span>
+        <button class="favorite styled" type="button">Add to favorites</button>
+
       </div>
     `;
     })
