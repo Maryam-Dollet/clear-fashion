@@ -15,14 +15,17 @@ Search for available brands list
 // current products on the page
 let currentProducts = [];
 let currentPagination = {};
-var dateToday = Date.now();
 let currentBrands = [];
+
+var dateToday = Date.now();
 
 let tempProducts = [];
 let tempbrand = "";
 let recent = "No";
 let reasonale = "No";
 let sort = "";
+
+let favoriteProducts = [];
 
 // instantiate the selectors
 const selectShow = document.querySelector('#show-select');
@@ -117,8 +120,7 @@ const renderProducts = products => {
         <a href="${product.link}" target="_blank" rel="noopener noreferrer">${product.name}</a>
         <span>${product.price}</span>
         <span> <FONT COLOR="#ff0000"> ${product.released}</FONT> </span>
-        <button class="favorite styled" type="button">Add to favorites</button>
-
+        <button id=${product.uuid} type="button" onclick="addToFavorites(this.id)">Add to favorites</button>
       </div>
     `;
     })
@@ -233,6 +235,12 @@ const getMostRecentdate = async() => {
   var date = sortByDate(prods.result).reverse()[0].released;
   recentDate.innerHTML = date;
 }
+
+// Add to favorites 
+
+const addToFavorites = (id) => {
+  
+};
 
 /**
  * Declaration of all Listeners
