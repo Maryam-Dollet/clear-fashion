@@ -244,6 +244,7 @@ const addToFavorites = (id) => {
   }
   else{
     alert("Product added");
+    currentProducts.find(item => item.uuid === id).favorite = true
     var fav = currentProducts.find(item => item.uuid === id);
     favoriteProducts.push(fav);
   }
