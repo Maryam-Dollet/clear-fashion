@@ -290,13 +290,16 @@ selectShow.addEventListener('change', async (event) => {
   if (sort == "date-desc"){
     products.result = sortByDate(products.result)
   }
+
   if (sort == "fav-prod"){
     products.result = filterFavoriteProducts(products.result)
     selectShow.value = "all"
+    render(favoriteProducts, currentPagination)
   }
-
-  setCurrentProducts(products);
-  render(currentProducts, currentPagination);
+  else{
+    setCurrentProducts(products);
+    render(currentProducts, currentPagination);
+  }
 
 });
 
@@ -332,8 +335,15 @@ selectPage.addEventListener('change', async (event) => {
     selectShow.value = 222
   }
 
-  setCurrentProducts(products);
-  render(currentProducts, currentPagination)
+  if (sort == "fav-prod"){
+    products.result = filterFavoriteProducts(products.result)
+    selectShow.value = "all"
+    render(favoriteProducts, currentPagination)
+  }
+  else{
+    setCurrentProducts(products);
+    render(currentProducts, currentPagination);
+  }
 
 });
 
@@ -369,8 +379,15 @@ selectBrand.addEventListener('change', async(event) =>{
   }
 
   tempbrand = event.target.value;
-  setCurrentProducts(products);
-  render(currentProducts, currentPagination);
+  if (sort == "fav-prod"){
+    products.result = filterFavoriteProducts(products.result)
+    selectShow.value = "all"
+    render(favoriteProducts, currentPagination)
+  }
+  else{
+    setCurrentProducts(products);
+    render(currentProducts, currentPagination);
+  }
 });
 
 selectRecently.addEventListener('change', async(event)  =>{
@@ -405,8 +422,15 @@ selectRecently.addEventListener('change', async(event)  =>{
   }
 
   recent = event.target.value;
-  setCurrentProducts(products);
-  render(currentProducts, currentPagination);
+  if (sort == "fav-prod"){
+    products.result = filterFavoriteProducts(products.result)
+    selectShow.value = "all"
+    render(favoriteProducts, currentPagination)
+  }
+  else{
+    setCurrentProducts(products);
+    render(currentProducts, currentPagination);
+  }
 });
 
 selectReasonable.addEventListener('change', async(event) =>{
@@ -440,8 +464,15 @@ selectReasonable.addEventListener('change', async(event) =>{
   }
 
   reasonale = event.target.value;
-  setCurrentProducts(products);
-  render(currentProducts, currentPagination);
+  if (sort == "fav-prod"){
+    products.result = filterFavoriteProducts(products.result)
+    selectShow.value = "all"
+    render(favoriteProducts, currentPagination)
+  }
+  else{
+    setCurrentProducts(products);
+    render(currentProducts, currentPagination);
+  }
 
 });
 
@@ -460,10 +491,6 @@ sortSelect.addEventListener('change', async(event) =>{
   if (event.target.value == "date-desc"){
     products.result = sortByDate(products.result)
   }
-  if (event.target.value == "fav-prod"){
-    products.result = filterFavoriteProducts(products.result)
-    selectShow.value = 222;
-  }
 
   if (tempbrand != ""){
     products.result = filterProductsBrand(products.result, tempbrand)
@@ -476,8 +503,15 @@ sortSelect.addEventListener('change', async(event) =>{
   }
 
   sort = event.target.value
-  setCurrentProducts(products)
-  render(currentProducts, currentPagination);
+  if (event.target.value == "fav-prod"){
+    products.result = filterFavoriteProducts(products.result)
+    selectShow.value = 222;
+    render(favoriteProducts, currentPagination)
+  }
+  else{
+    setCurrentProducts(products)
+    render(currentProducts, currentPagination);
+  }
 
 });
 
