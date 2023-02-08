@@ -119,7 +119,7 @@ const renderProducts = products => {
         <span>${product.brand}</span>
         <a href="${product.link}" target="_blank" rel="noopener noreferrer">${product.name}</a>
         <span>${product.price}</span>
-        <span> <FONT COLOR="#ff0000"> ${product.released}</FONT> </span>
+        <span> <b><FONT COLOR="#ff0000"> ${product.released}</FONT> </b> </span>
         <button id=${product.uuid} type="button" onclick="addToFavorites(this.id)">Add to favorites</button>
       </div>
     `;
