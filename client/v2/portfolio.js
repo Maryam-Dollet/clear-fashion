@@ -239,7 +239,15 @@ const getMostRecentdate = async() => {
 // Add to favorites 
 
 const addToFavorites = (id) => {
-  
+  if(favoriteProducts.some(product => product.uuid === id)){
+    alert('Product already in your favorites')
+  }
+  else{
+    alert("Product added");
+    var fav = currentProducts.find(item => item.uuid === id);
+    favoriteProducts.push(fav);
+  }
+
 };
 
 /**
