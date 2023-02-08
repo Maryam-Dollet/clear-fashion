@@ -225,6 +225,11 @@ const Pvalues = async() =>{
   p95.innerHTML = p_value(prods.result, 95);
 }
 
+const getMostRecentdate = async() => {
+  const prods = await fetchProducts(1,currentPagination.count);
+  
+}
+
 /**
  * Declaration of all Listeners
  */
