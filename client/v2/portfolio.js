@@ -251,6 +251,13 @@ const addToFavorites = (id) => {
 
 };
 
+// filter favorite products
+
+const filterFavoriteProducts = products => {
+  const filteredprods = products.filter( product => product.favorite == true);
+  return filteredprods;
+};
+
 /**
  * Declaration of all Listeners
  */
@@ -282,6 +289,10 @@ selectShow.addEventListener('change', async (event) => {
   }
   if (sort == "date-desc"){
     products.result = sortByDate(products.result)
+  }
+  if (sort == "fav-prod"){
+    products.result = filterFavoriteProducts(products.result)
+    selectShow.value = "all"
   }
 
   setCurrentProducts(products);
@@ -316,6 +327,10 @@ selectPage.addEventListener('change', async (event) => {
   if (sort == "date-desc"){
     products.result = sortByDate(products.result)
   }
+  if (sort == "fav-prod"){
+    products.result = filterFavoriteProducts(products.result)
+    selectShow.value = 222
+  }
 
   setCurrentProducts(products);
   render(currentProducts, currentPagination)
@@ -347,6 +362,10 @@ selectBrand.addEventListener('change', async(event) =>{
   }
   if (sort == "date-desc"){
     products.result = sortByDate(products.result)
+  }
+  if (sort == "fav-prod"){
+    products.result = filterFavoriteProducts(products.result)
+    selectShow.value = 222
   }
 
   tempbrand = event.target.value;
@@ -380,6 +399,10 @@ selectRecently.addEventListener('change', async(event)  =>{
   if (sort == "date-desc"){
     products.result = sortByDate(products.result)
   }
+  if (sort == "fav-prod"){
+    products.result = filterFavoriteProducts(products.result)
+    selectShow.value = 222
+  }
 
   recent = event.target.value;
   setCurrentProducts(products);
@@ -411,6 +434,10 @@ selectReasonable.addEventListener('change', async(event) =>{
   if (sort == "date-desc"){
     products.result = sortByDate(products.result)
   }
+  if (sort == "fav-prod"){
+    products.result = filterFavoriteProducts(products.result)
+    selectShow.value = 222
+  }
 
   reasonale = event.target.value;
   setCurrentProducts(products);
@@ -432,6 +459,10 @@ sortSelect.addEventListener('change', async(event) =>{
   }
   if (event.target.value == "date-desc"){
     products.result = sortByDate(products.result)
+  }
+  if (event.target.value == "fav-prod"){
+    products.result = filterFavoriteProducts(products.result)
+    selectShow.value = 222;
   }
 
   if (tempbrand != ""){
