@@ -19,8 +19,9 @@ var dateToday = Date.now();
 let currentBrands = [];
 
 let tempProducts = [];
-let tempbrand;
-let recent;
+let tempbrand = "";
+let recent = "No";
+let reasonale = "No";
 
 // instantiate the selectors
 const selectShow = document.querySelector('#show-select');
@@ -126,7 +127,8 @@ const filterProductsBrand = (products, tbrand) => {
 };
 
 const filterReasonableProducts = (products) =>{
-
+  const filteredprods = products.filter(product => product.price <= 50);
+  return filteredprods;
 };
 
 const filterRecentProducts = products => {
@@ -180,12 +182,15 @@ const render = (products, pagination) => {
  */
 selectShow.addEventListener('change', async (event) => {
   const products = await fetchProducts(currentPagination.currentPage, parseInt(event.target.value));
-
+  
   if (tempbrand != ""){
     products.result = filterProductsBrand(products.result, tempbrand)
   }
   if (recent == "Yes"){
     products.result = filterRecentProducts(products.result);
+  }
+  if (reasonale == "Yes"){
+    products.result = filterReasonableProducts(product.result)
   }
   
   setCurrentProducts(products);
@@ -194,16 +199,20 @@ selectShow.addEventListener('change', async (event) => {
 });
 
 selectPage.addEventListener('change', async (event) => {
+
   const products = await fetchProducts(parseInt(event.target.value), currentPagination.pageSize);
 
   
-
   if (tempbrand != ""){
     products.result = filterProductsBrand(products.result, tempbrand)
   }
   if (recent == "Yes"){
     products.result = filterRecentProducts(products.result);
   }
+  if (reasonale == "Yes"){
+    products.result = filterReasonableProducts(product.result)
+  }
+  
 
   setCurrentProducts(products);
   render(currentProducts, currentPagination)
@@ -215,26 +224,56 @@ selectBrand.addEventListener('change', async(event) =>{
 
   if (event.target.value != ""){
     //alert(event.target.value);
-    currentProducts = filterProductsBrand(currentProducts,tempbrand)
+    products.result = filterProductsBrand(products.result, event.target.value)
+  }
+  if (recent == "Yes"){
+    products.result = filterRecentProducts(products.result)
+  }
+  if (reasonale == "Yes"){
+    products.result = filterReasonableProducts(product.result)
   }
 
   tempbrand = event.target.value;
+  setCurrentProducts(products);
+  render(currentProducts, currentPagination);
+});
+
+selectRecently.addEventListener('change', async(event)  =>{
+  const products = await fetchProducts(currentPagination.currentPage, currentPagination.pageSize);
+
+  if (tempbrand != ""){
+    //alert(event.target.value);
+    products.result = filterProductsBrand(products.result, event.target.value)
+  }
+  if (event.target.value == "Yes"){
+    products.result = filterRecentProducts(products.result)
+  }
+  if (reasonale == "Yes"){
+    products.result = filterReasonableProducts(product.result)
+  }
+
+  recent = event.target.value;
+  setCurrentProducts(products);
   render(currentProducts, currentPagination);
 });
 
 selectReasonable.addEventListener('change', async(event) =>{
+  const products = await fetchProducts(currentPagination.currentPage, currentPagination.pageSize);
+  
+  if (tempbrand != ""){
+    products.result = filterProductsBrand(products.result, tempbrand)
+  }
+  if (recent == "Yes"){
+    products.result = filterRecentProducts(products.result)
+  }
   if (event.target.value == "Yes"){
-    
+    products.result = filterReasonableProducts(product.result)
   }
 
-});
-
-selectRecently.addEventListener('change', async(event)  =>{
-  if (event.target.value == "Yes"){
-    currentProducts = filterRecentProducts(currentProducts)
-  }
-  recent = event.target.value;
+  reasonale = event.target.value;
+  setCurrentProducts(products);
   render(currentProducts, currentPagination);
+
 });
 
 document.addEventListener('DOMContentLoaded', async () => {
