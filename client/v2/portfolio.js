@@ -210,7 +210,7 @@ selectPage.addEventListener('change', async (event) => {
     products.result = filterRecentProducts(products.result);
   }
   if (reasonale == "Yes"){
-    products.result = filterReasonableProducts(product.result)
+    products.result = filterReasonableProducts(products.result)
   }
   
 
@@ -230,7 +230,7 @@ selectBrand.addEventListener('change', async(event) =>{
     products.result = filterRecentProducts(products.result)
   }
   if (reasonale == "Yes"){
-    products.result = filterReasonableProducts(product.result)
+    products.result = filterReasonableProducts(products.result)
   }
 
   tempbrand = event.target.value;
@@ -249,7 +249,7 @@ selectRecently.addEventListener('change', async(event)  =>{
     products.result = filterRecentProducts(products.result)
   }
   if (reasonale == "Yes"){
-    products.result = filterReasonableProducts(product.result)
+    products.result = filterReasonableProducts(products.result)
   }
 
   recent = event.target.value;
@@ -267,7 +267,7 @@ selectReasonable.addEventListener('change', async(event) =>{
     products.result = filterRecentProducts(products.result)
   }
   if (event.target.value == "Yes"){
-    products.result = filterReasonableProducts(product.result)
+    products.result = filterReasonableProducts(products.result)
   }
 
   reasonale = event.target.value;
