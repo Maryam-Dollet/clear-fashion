@@ -254,7 +254,7 @@ const addToFavorites = (id) => {
 // filter favorite products
 
 const filterFavoriteProducts = products => {
-  const filteredprods = products.filter( product => product.favorite == true);
+  const filteredprods = Object.keys(products).filter( product => product["favorite"] == true);
   return filteredprods;
 };
 
