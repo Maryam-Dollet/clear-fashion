@@ -11,3 +11,18 @@ body {
   line-height: 1.5;
   padding: 4em 1em;
 }
+
+h2 {
+  margin-top: 1em;
+  padding-top: 1em;
+}
+
+body {
+  color: #555;
+}
+
+h1,
+h2,
+strong {
+  color: #333;
+}
