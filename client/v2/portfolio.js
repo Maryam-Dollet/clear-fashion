@@ -209,6 +209,7 @@ const getRecentProducts = async () => {
 
 const p_value = (products, q) => {
   var pvalue
+  products = sortByPrice(products);
   q = q/100;
   var pos = ((products.length)-1)*q;
   var base = Math.floor(pos);
