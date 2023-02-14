@@ -15,12 +15,10 @@ const parse = data => {
           .find('.full-unstyled-link')
           .text()
           .trim()
-          .replace(/\s/g, ' ');
-        const price = parseInt(
-          $(element)
+          //.replace(/\s/g, ' ');
+        const price = $(element)
             .find('.money')
-            .text()
-        );
+            .text();
   
         return {name, price};
       })
