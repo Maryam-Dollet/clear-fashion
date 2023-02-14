@@ -2,7 +2,7 @@
 //const dedicatedbrand = require('./eshops/dedicatedbrand');
 const circlesportswear = require('./eshops/circlesportswear');
 
-/*
+
 async function sandbox (eshop = 'https://www.dedicatedbrand.com/en/men/news') {
   try {
     console.log(`🕵️‍♀️  browsing ${eshop} eshop`);
@@ -17,7 +17,7 @@ async function sandbox (eshop = 'https://www.dedicatedbrand.com/en/men/news') {
     process.exit(1);
   }
 }
-*/
+
 
 async function sandbox2 (eshop = 'https://shop.circlesportswear.com/collections/collection-femme') {
   try {
@@ -36,4 +36,4 @@ async function sandbox2 (eshop = 'https://shop.circlesportswear.com/collections/
 
 const [,, eshop] = process.argv;
 
-sandbox2('https://shop.circlesportswear.com/collections/collection-femme');
+sandbox(eshop);
