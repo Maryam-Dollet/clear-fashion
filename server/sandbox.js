@@ -1,6 +1,6 @@
 /* eslint-disable no-console, no-process-exit */
 
-//const dedicatedbrand = require('./eshops/dedicatedbrand');
+const dedicatedbrand = require('./eshops/dedicatedbrand');
 const circlesportswear = require('./eshops/circlesportswear');
 const montlimart = require('./eshops/montlimart')
 
@@ -53,6 +53,6 @@ async function sandbox3 (eshop = 'https://www.montlimart.com/99-vetements') {
 
 const [,, eshop] = process.argv;
 
-sandbox(eshop)
+sandbox(eshop);
 sandbox2(eshop);
-sandbox3(eshop)
+sandbox3(eshop);
