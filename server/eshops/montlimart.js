@@ -23,12 +23,25 @@ const parse = data => {
             .text()
         );
 
-        const image = $(element)
+        let image = $(element)
           .find('.product-miniature__thumb')
-          .children('img')
+          .find('img')
+          .attr('data-src')
           //.eq(0)
+        
+        if (image === null){
+          image = $(element)
+          .find('.product-miniature__thumb')
+          .find('source').eq(1)
+          .attr('src')
+        }
+        
+        const video = $(element)
+        .find('.product-miniature__thumb')
+        .find('source').eq(1)
+        .attr('src')
   
-        return {name, price, image};
+        return {name, price, image, video};
       })
       .get();
   };
