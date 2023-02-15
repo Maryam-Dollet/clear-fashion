@@ -2,6 +2,7 @@
 
 //const dedicatedbrand = require('./eshops/dedicatedbrand');
 const circlesportswear = require('./eshops/circlesportswear');
+const montlimart = require('./eshops/montlimart')
 
 
 
@@ -35,6 +36,22 @@ async function sandbox2 (eshop = 'https://shop.circlesportswear.com/collections/
   }
 }
 
+async function sandbox3 (eshop = 'https://www.montlimart.com/99-vetements') {
+  try {
+    console.log(`🕵️‍♀️  parse ${eshop} eshop`);
+
+    const products = await montlimart.scrape(eshop);
+
+    console.log(products);
+    console.log('done');
+    process.exit(0);
+  } catch (e) {
+    console.error(e);
+    process.exit(1);
+  }
+}
+
 const [,, eshop] = process.argv;
 
-sandbox2(eshop);
+//sandbox2(eshop);
+sandbox3(eshop)
