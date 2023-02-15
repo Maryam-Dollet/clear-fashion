@@ -14,7 +14,7 @@ async function sandbox (eshop = 'https://www.dedicatedbrand.com/en/men/news') {
 
     console.log(products);
     console.log('done');
-    process.exit(0);
+    //process.exit(0);
   } catch (e) {
     console.error(e);
     process.exit(1);
@@ -29,22 +29,22 @@ async function sandbox2 (eshop = 'https://shop.circlesportswear.com/collections/
 
     console.log(products);
     console.log('done');
-    process.exit(0);
+    //process.exit(0);
   } catch (e) {
     console.error(e);
     process.exit(1);
   }
 }
 
-async function sandbox3 (eshop = 'https://www.montlimart.com/99-vetements') {
+async function sandbox3 (eshop1 = 'https://www.montlimart.com/99-vetements') {
   try {
-    console.log(`🕵️‍♀️  parse ${eshop} eshop`);
+    console.log(`🕵️‍♀️  parse ${eshop1} eshop`);
 
     const products = await montlimart.scrape(eshop);
 
     console.log(products);
     console.log('done');
-    process.exit(0);
+    //process.exit(0);
   } catch (e) {
     console.error(e);
     process.exit(1);
