@@ -22,8 +22,13 @@ const parse = data => {
             .find('.price')
             .text()
         );
+
+        const image = $(element)
+          .find('.product-miniature__thumb')
+          .children('img')
+          //.eq(0)
   
-        return {name, price};
+        return {name, price, image};
       })
       .get();
   };
