@@ -36,9 +36,9 @@ async function sandbox2 (eshop = 'https://shop.circlesportswear.com/collections/
   }
 }
 
-async function sandbox3 (eshop1 = 'https://www.montlimart.com/99-vetements') {
+async function sandbox3 (eshop = 'https://www.montlimart.com/99-vetements') {
   try {
-    console.log(`🕵️‍♀️  parse ${eshop1} eshop`);
+    console.log(`🕵️‍♀️  parse ${eshop} eshop`);
 
     const products = await montlimart.scrape(eshop);
 
