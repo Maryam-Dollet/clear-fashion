@@ -25,8 +25,16 @@ const parse = data => {
             .replace(/€/g, ' ')
         
         price = Array.from(new Set(price.split(' '))).join(' ').replace(' ','')
+
+        let image = $(element)
+          .find('.media')
+          .children('img')
+          .attr('srcset')
+        
+        image = image.split(',')[1].split(' ')[0]
+
   
-        return {name, price};
+        return {name, price, image};
       })
       .get();
   };

@@ -21,8 +21,12 @@ const parse = data => {
           .find('.productList-price')
           .text()
       );
+      const image = $(element)
+        .find('.productList-image')
+        .children('img')
+        .attr('data-src')
 
-      return {name, price};
+      return {name, price, image};
     })
     .get();
 };

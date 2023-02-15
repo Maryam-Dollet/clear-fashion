@@ -53,6 +53,6 @@ async function sandbox3 (eshop = 'https://www.montlimart.com/99-vetements') {
 
 const [,, eshop] = process.argv;
 
-sandbox(eshop);
+//sandbox(eshop);
 sandbox2(eshop);
-sandbox3(eshop);
+//sandbox3(eshop);
