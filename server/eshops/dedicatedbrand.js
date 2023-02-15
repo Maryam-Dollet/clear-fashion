@@ -25,8 +25,12 @@ const parse = data => {
         .find('.productList-image')
         .children('img')
         .attr('data-src')
+      
+      const url = 'https://www.dedicatedbrand.com' + $(element)
+        .find('.productList-link')
+        .attr('href')
 
-      return {name, price, image};
+      return {name, price, image, url};
     })
     .get();
 };

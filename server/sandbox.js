@@ -84,8 +84,8 @@ async function sandboxall (eshop1 = 'https://www.dedicatedbrand.com/en/men/news'
 const [,, eshop] = process.argv;
 
 
-sandbox(eshop);
-sandbox2(eshop);
+//sandbox(eshop);
+//sandbox2(eshop);
 sandbox3(eshop);
 
 

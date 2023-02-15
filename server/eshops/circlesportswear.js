@@ -32,9 +32,14 @@ const parse = data => {
           .attr('srcset')
         
         image = image.split(',')[1].split(' ')[0]
+        
+        const url = "https://shop.circlesportswear.com"+$(element)
+        .find('.card__heading')
+        .children('a')
+        .attr('href')
 
   
-        return {name, price, image};
+        return {name, price, image, url};
       })
       .get();
   };

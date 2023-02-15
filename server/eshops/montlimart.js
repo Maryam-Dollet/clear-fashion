@@ -34,8 +34,13 @@ const parse = data => {
           .find('source').eq(1)
           .attr('src')
         }
+
+        const url = $(element)
+        .find('.product-miniature__title')
+        .children('a')
+        .attr('href')
   
-        return {name, price, image};
+        return {name, price, image, url};
       })
       .get();
   };
