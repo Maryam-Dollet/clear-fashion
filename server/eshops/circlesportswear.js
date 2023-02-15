@@ -11,17 +11,20 @@ const parse = data => {
   
     return $('.product-grid-container .grid__item')
       .map((i, element) => {
-        const name = $(element)
+        let name = $(element)
           .find('.full-unstyled-link')
           .text()
           .trim()
-          //.replace(/\s/g, ' ')
+          .replace(/\s/g, ' ')
         
-        //name = Array.from(new Set(name.split(' '))).toString()
-        const price = $(element)
+        name = Array.from(new Set(name.split(' '))).join(' ').slice(0, -1)
+        //name = name.toString()
+        let price = $(element)
             .find('.money')
             .text()
-            .trim()
+            .replace(/€/g, ' ')
+        
+        price = Array.from(new Set(price.split(' '))).join(' ').replace(' ','')
   
         return {name, price};
       })
