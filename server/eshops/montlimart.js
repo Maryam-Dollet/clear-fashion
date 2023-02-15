@@ -35,12 +35,12 @@ const parse = data => {
           .attr('src')
         }
 
-        const url = $(element)
+        const link = $(element)
         .find('.product-miniature__title')
         .children('a')
         .attr('href')
   
-        return {name, price, image, url};
+        return {name, price, image, link};
       })
       .get();
   };

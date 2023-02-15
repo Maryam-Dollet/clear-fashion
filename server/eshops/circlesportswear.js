@@ -33,13 +33,13 @@ const parse = data => {
         
         image = image.split(',')[1].split(' ')[0]
         
-        const url = "https://shop.circlesportswear.com"+$(element)
+        const link = "https://shop.circlesportswear.com"+$(element)
         .find('.card__heading')
         .children('a')
         .attr('href')
 
   
-        return {name, price, image, url};
+        return {name, price, image, link};
       })
       .get();
   };

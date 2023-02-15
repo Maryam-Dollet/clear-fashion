@@ -26,11 +26,11 @@ const parse = data => {
         .children('img')
         .attr('data-src')
       
-      const url = 'https://www.dedicatedbrand.com' + $(element)
+      const link = 'https://www.dedicatedbrand.com' + $(element)
         .find('.productList-link')
         .attr('href')
 
-      return {name, price, image, url};
+      return {name, price, image, link};
     })
     .get();
 };
