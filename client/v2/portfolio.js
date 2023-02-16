@@ -121,7 +121,7 @@ const renderProducts = products => {
         </div>
         <div class="col">
           <pre>
-            <span class="underline"><font size="+5">${product.brand}</font></span>
+            <span class="underline"><font size="+3">${product.brand}</font></span>
             <a href="${product.link}" target="_blank" rel="noopener noreferrer">${product.name}</a>
             price : ${product.price} €
             release date : <span class="date">${product.released}</span>
