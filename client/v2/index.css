@@ -3,7 +3,7 @@
 body {
     margin: 0 auto;
     max-width: 50em;
-    background-color: #ebb392;
+    background-color: #ebbfa6;
   }
 
 /*
@@ -41,7 +41,7 @@ div {
 }
 
 a {
-  color: #e02ce0;
+  color: #ce4bad;
 }
 
 header {
@@ -118,4 +118,58 @@ header h1 {
 
 .select-items div:hover, .same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+img {
+  width: 200px;
+  height: auto
+}
+
+/*
+.product {
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.text {
+  font-size: 20px;
+  padding-left: 20px;
+}
+*/
+
+/* Three image containers (use 25% for four, and 50% for two, etc) */
+.col {
+  font-size: 20px;
+  padding-left: 20px;
+  float: left;
+  width: 33.33%;
+  padding: 10px;
+}
+
+/* Clear floats after image containers */
+.product::after {
+  align-items: center;
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.underline {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.date {
+  font-weight: bold;
+  color: #dd3434
 }

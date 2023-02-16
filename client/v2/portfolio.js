@@ -116,13 +116,20 @@ const renderProducts = products => {
     .map(product => {
       return `
       <div class="product" id=${product.uuid}>
-        <span>${product.brand}</span>
-        <a href="${product.link}" target="_blank" rel="noopener noreferrer">${product.name}</a>
-        <span>${product.price}</span>
-        <span> <b><FONT COLOR="#ff0000"> ${product.released}</FONT> </b> </span>
-        <button id=${product.uuid} type="button" onclick="addToFavorites(this.id)">Add to favorites</button>
+        <div class="col">
+          <img src=${product.photo}>
+        </div>
+        <div class="col">
+          <pre>
+            <span class="underline"><font size="+5">${product.brand}</font></span>
+            <a href="${product.link}" target="_blank" rel="noopener noreferrer">${product.name}</a>
+            price : ${product.price} €
+            release date : <span class="date">${product.released}</span>
+            <button id=${product.uuid} type="button" onclick="addToFavorites(this.id)">Add to favorites</button>
+          </pre>
+        </div>
       </div>
-    `;
+     `;
     })
     .join('');
 
