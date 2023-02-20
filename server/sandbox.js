@@ -50,10 +50,10 @@ async function sandbox3 (eshop = 'https://www.montlimart.com/99-vetements') {
 
     const products = await montlimart.scrape(eshop);
 
-    //console.log(products);
+    console.log(products);
     console.log('done');
     //process.exit(0);
-    return products;
+    //return products;
   } catch (e) {
     console.error(e);
     process.exit(1);
@@ -112,7 +112,8 @@ async function sandboxall (eshop1 = 'https://www.dedicatedbrand.com/en/men/news'
   }
 }
 
-const [,, eshop1, eshop2, eshop3] = process.argv;
+//const [,, eshop1, eshop2, eshop3] = process.argv;
+const [,, eshop] = process.argv;
 
 /*
 const prods1 = sandbox(eshop);
@@ -121,4 +122,6 @@ let prods3 = sandbox3(eshop);
 
 console.log(prods1);
 */
-sandboxall(eshop1, eshop2, eshop3)
+//sandboxall(eshop1, eshop2, eshop3)
+
+sandbox3("https://www.montlimart.com/72-nouveautes");
