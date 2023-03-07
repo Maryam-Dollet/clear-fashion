@@ -1,7 +1,7 @@
 const {MongoClient} = require('mongodb');
 const products = require("./output.json")
 
-const MONGODB_URI = "mongodb+srv://maryam:jsonapi@cluster0.kolklxw.mongodb.net/?retryWrites=true&w=majority";
+const MONGODB_URI = "mongodb+srv://maryam:<password>@cluster0.kolklxw.mongodb.net/?retryWrites=true&w=majority";
 const MONGODB_DB_NAME = 'clearfashion';
 
 function getToday(date = new Date()){
