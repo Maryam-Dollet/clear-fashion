@@ -30,7 +30,9 @@ const parse = data => {
         .find('.productList-link')
         .attr('href')
 
-      return {name, price, image, link};
+      const brand = "dedicated"
+
+      return {name, price, image,brand, link};
     })
     .get();
 };

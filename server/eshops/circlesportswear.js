@@ -26,6 +26,8 @@ const parse = data => {
         
         price = Array.from(new Set(price.split(' '))).join(' ').replace(' ','')
 
+        price = parseInt(price)
+
         let image = $(element)
           .find('.media')
           .children('img')
@@ -38,8 +40,10 @@ const parse = data => {
         .children('a')
         .attr('href')
 
+        const brand = "circlesportswear"
+
   
-        return {name, price, image, link};
+        return {name, price, image, brand, link};
       })
       .get();
   };

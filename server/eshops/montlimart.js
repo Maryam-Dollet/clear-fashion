@@ -39,8 +39,10 @@ const parse = data => {
         .find('.product-miniature__title')
         .children('a')
         .attr('href')
+
+        const brand = "montlimart"
   
-        return {name, price, image, link};
+        return {name, price, image, brand, link};
       })
       .get();
   };

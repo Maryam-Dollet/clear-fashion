@@ -132,7 +132,7 @@ async function sandboxall (eshop1 = 'https://www.dedicatedbrand.com', eshop2 = '
     //console.log(objprods);
 
     //const jsonContent = JSON.stringify(objprods, null, 2);
-    const jsonContent = JSON.stringify(objprods, null, 2);
+    const jsonContent = JSON.stringify(allprods, null, 2);
 
     //console.log(jsonContent)
 
