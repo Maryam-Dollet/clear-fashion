@@ -1,7 +1,7 @@
 const {MongoClient} = require('mongodb');
 const sd = require("./sandbox")
 
-const MONGODB_URI = 'mongodb+srv://<user>:<password>@<cluster-url>?retryWrites=true&writeConcern=majority';
+const MONGODB_URI = "mongodb+srv://maryam:<jsonapi>@cluster0.kolklxw.mongodb.net/?retryWrites=true&w=majority";
 const MONGODB_DB_NAME = 'clearfashion';
 
 const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});

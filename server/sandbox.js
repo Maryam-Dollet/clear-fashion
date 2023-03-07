@@ -37,11 +37,7 @@ async function sandbox(eshop = 'https://www.dedicatedbrand.com/en/men/all-men?p=
 
 async function dedicatedDEDICATED(){
   var products = []
-<<<<<<< HEAD
   for (let i = 1; i <= 16; i++) {
-=======
-  for (let i = 0; i <= 16; i++) {
->>>>>>> 3a867590bf0c4951995b2445377c05178174a88d
     link = "https://www.dedicatedbrand.com/en/men/all-men?p="+i
     /*
     console.log(`🕵️‍♀️  browsing ${link} eshop`);
@@ -50,11 +46,7 @@ async function dedicatedDEDICATED(){
     var slices = await partprod
     products = products.concat(slices)
   }
-<<<<<<< HEAD
   for (let i = 1; i <= 16; i++){
-=======
-  for (let i = 0; i <= 16; i++){
->>>>>>> 3a867590bf0c4951995b2445377c05178174a88d
     link = "https://www.dedicatedbrand.com/en/women/all-women?p="+i
     var partprod = sandbox(link)
     var slices = await partprod
@@ -139,13 +131,8 @@ async function sandboxall (eshop1 = 'https://www.dedicatedbrand.com', eshop2 = '
 
     //console.log(objprods);
 
-<<<<<<< HEAD
-    const jsonContent = JSON.stringify(objprods, null, 2);
-    //const jsonContent = JSON.stringify(allprods, null, 2);
-=======
     //const jsonContent = JSON.stringify(objprods, null, 2);
-    const jsonContent = JSON.stringify(allprods, null, 2);
->>>>>>> 3a867590bf0c4951995b2445377c05178174a88d
+    const jsonContent = JSON.stringify(objprods, null, 2);
 
     //console.log(jsonContent)
 
@@ -158,12 +145,8 @@ async function sandboxall (eshop1 = 'https://www.dedicatedbrand.com', eshop2 = '
       console.log("JSON file has been saved.");
     });
     
-
+    return allprods;
     //process.exit(0);
-<<<<<<< HEAD
-    return allprods
-=======
->>>>>>> 3a867590bf0c4951995b2445377c05178174a88d
 
   } catch (e) {
     console.error(e);
