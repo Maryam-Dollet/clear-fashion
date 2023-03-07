@@ -41,8 +41,12 @@ const parse = data => {
         .attr('href')
 
         const brand = "montlimart"
+
+        const datelist = ["2023-02-24","2023-02-18","2023-02-05","2023-03-03","2023-03-07"];
+        const random = Math.floor(Math.random() * datelist.length);
+        const date = datelist[random];
   
-        return {name, price, image, brand, link};
+        return {name, price, image, brand, date, link};
       })
       .get();
   };

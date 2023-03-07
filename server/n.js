@@ -51,11 +51,40 @@ async function priceSort(){
     const collection = db.collection('products');
 
     const query = {}
-    const mysort = { price: -1 };
+    const mysort = { price: 1 };
     const prods = await collection.find(query).sort(mysort).toArray();
 
     console.log(prods);
     client.close();
+}
+
+async function dateSort(){
+    const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
+    const db =  client.db(MONGODB_DB_NAME)
+
+    const collection = db.collection('products');
+
+    const query = {}
+    const mysort = { date: 1 };
+    const prods = await collection.find(query).sort(mysort).toArray();
+
+    console.log(prods);
+    client.close();
+
+}
+
+async function selectDate(){
+    const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
+    const db =  client.db(MONGODB_DB_NAME)
+
+    const collection = db.collection('products');
+
+    const query = {date:{$lte: new Date()}}
+    const prods = await collection.find(query).toArray();
+
+    console.log(prods);
+    client.close();
+
 }
 
 //findbrand('circlesportswear');
@@ -64,5 +93,9 @@ async function priceSort(){
 
 //priceSort()
 
-addprods();
+//dateSort();
+
+selectDate()
+
+//addprods();
 
