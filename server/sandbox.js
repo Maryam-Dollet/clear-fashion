@@ -123,11 +123,6 @@ async function sandboxall (eshop1 = 'https://www.dedicatedbrand.com', eshop2 = '
     var allprods =  products.concat(products2).concat(products2_2).concat(products3);
 
     console.log(allprods.length)
-    
-    
-    var objprods = {}
-
-    objprods.products = allprods
 
     //console.log(objprods);
 
