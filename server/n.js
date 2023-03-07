@@ -4,6 +4,32 @@ const products = require("./output.json")
 const MONGODB_URI = "mongodb+srv://maryam:jsonapi@cluster0.kolklxw.mongodb.net/?retryWrites=true&w=majority";
 const MONGODB_DB_NAME = 'clearfashion';
 
+function getToday(date = new Date()){
+    //var today = new Date();
+    var dd = date.getDate();
+
+    var mm = date.getMonth()+1; 
+    var yyyy = date.getFullYear();
+
+    if(dd<10) 
+    {
+        dd='0'+dd;
+    } 
+
+    if(mm<10) 
+    {
+        mm='0'+mm;
+    } 
+    today = yyyy+'-'+mm+'-'+dd;
+
+    return today;
+}
+
+function removeTwoWeeks(date = new Date()) {
+    date.setDate(date.getDate() - 7 * 2);
+    return date;
+  }
+
 async function addprods(){
     const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
     const db =  client.db(MONGODB_DB_NAME)
@@ -79,7 +105,12 @@ async function selectDate(){
 
     const collection = db.collection('products');
 
-    const query = {date:{$lte: new Date()}}
+    let yourDate = new Date()
+    yourDate.toISOString().split('T')[0]
+
+    console.log(yourDate)
+
+    const query = {date:{$lte: getToday(), $gte: getToday(removeTwoWeeks())}}
     const prods = await collection.find(query).toArray();
 
     console.log(prods);
@@ -96,6 +127,10 @@ async function selectDate(){
 //dateSort();
 
 selectDate()
+
+
+//console.log(getToday(removeTwoWeeks()))
+//console.log(getToday())
 
 //addprods();
 
