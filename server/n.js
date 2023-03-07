@@ -105,11 +105,6 @@ async function selectDate(){
 
     const collection = db.collection('products');
 
-    let yourDate = new Date()
-    yourDate.toISOString().split('T')[0]
-
-    console.log(yourDate)
-
     const query = {date:{$lte: getToday(), $gte: getToday(removeTwoWeeks())}}
     const prods = await collection.find(query).toArray();
 
