@@ -1,6 +1,40 @@
 const cors = require('cors');
 const express = require('express');
+//const mongo = require("./n")
 const helmet = require('helmet');
+//const products = require("./output.json")
+
+
+const {MongoClient} = require('mongodb');
+var ObjectId = require('mongodb').ObjectId;
+
+const MONGODB_URI = "mongodb+srv://maryam:jsonapi@cluster0.kolklxw.mongodb.net/?retryWrites=true&w=majority";
+const MONGODB_DB_NAME = 'clearfashion';
+
+async function getAll(){
+  const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
+  const db =  client.db(MONGODB_DB_NAME)
+
+  const collection = db.collection('products');
+  const prods = await collection.find({}).toArray();
+
+  //console.log(prods);
+  client.close();
+  return prods
+}
+
+async function getId(id){
+
+  const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
+  const db =  client.db(MONGODB_DB_NAME)
+
+  const collection = db.collection('products');
+  const prods = await collection.find({_id : new ObjectId(id)}).toArray();
+
+  //console.log(prods);
+  client.close();
+  return prods
+}
 
 const PORT = 8092;
 
@@ -17,6 +51,48 @@ app.options('*', cors());
 app.get('/', (request, response) => {
   response.send({'ack': true});
 });
+
+app.get('/products', async (request, response) => {
+  const products = await getAll()
+  //response.send(products);
+
+  response.send(products[0])
+  
+})
+
+app.get('/products/search/', async (request, response) => {
+  const filters = request.query;
+  //const filters = request.query.brand
+  //const products = await getAll()
+  const brand = request.query.brand;
+  const price = request.query.price;
+  var limit = parseInt(request.query.limit) || 12;
+
+  let filter = {};
+  const sort = { price: 1 }
+
+  if(brand){
+    filter.brand = brand;
+  }
+  if(price){
+    filter.price = price
+  }
+  
+  const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
+  const db =  client.db(MONGODB_DB_NAME)
+
+  const collection = db.collection('products');
+  const prods = await collection.find(filter).sort(sort).limit(limit).toArray();
+
+  response.send(prods)
+
+})
+
+app.get('/products/:id', async (request, response) => {
+  const products = await getId(request.params.id)
+  response.send(products);
+
+})
 
 app.listen(PORT);
 
