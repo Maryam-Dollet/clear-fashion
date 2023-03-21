@@ -102,11 +102,16 @@ app.get('/products/search/', async (request, response) => {
   //const products = await getAll()
 
   const brand = request.query.brand;
+  const desc = requesct.query.desc;
   const price = parseInt(request.query.price);
   var limit = parseInt(request.query.limit);
+  var sort =  { price: 1 }
 
   let filter = {};
-  const sort = { price: 1 }
+  if(desc==true){
+    const sort = { price: -1 }
+  }
+  
 
   if(brand){
     filter.brand = brand;
