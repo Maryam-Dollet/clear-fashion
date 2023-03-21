@@ -11,7 +11,12 @@ var ObjectId = require('mongodb').ObjectId;
 const MONGODB_URI = "mongodb+srv://maryam:jsonapi@cluster0.kolklxw.mongodb.net/?retryWrites=true&w=majority";
 const MONGODB_DB_NAME = 'clearfashion';
 
+
 async function connectToDB(){
+
+}
+
+async function getAll(){
   const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
   const db =  client.db(MONGODB_DB_NAME)
 
@@ -43,6 +48,7 @@ async function getId(id){
   const prods = await collection.find({_id : new ObjectId(id)}).toArray();
 
   //console.log(prods);
+  client.close();
   return prods
 }
 
@@ -67,11 +73,14 @@ app.get('/products', async (request, response) => {
   //response.send(products);
 
   response.send(products)
+
+  response.send(products[0])
   
 })
 
 app.get('/products/search/', async (request, response) => {
   const filters = request.query;
+
 
   //const filters = request.query.brand
   //const products = await getAll()
@@ -88,11 +97,11 @@ app.get('/products/search/', async (request, response) => {
   }
   if(price){
     filter.price = {$lte : price}
+
   }
   
   const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
   const db =  client.db(MONGODB_DB_NAME)
-
 
   const collection = db.collection('products');
   const prods = await collection.find(filter).sort(sort).limit(limit).toArray();
@@ -107,8 +116,7 @@ app.get('/products/:id', async (request, response) => {
 
 })
 
-await connectToDB()
 
 app.listen(PORT);
 
-console.log(`📡 Running on port ${PORT}`);
+console.log(`📡 Running on port ${PORT}`)
