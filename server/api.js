@@ -26,6 +26,19 @@ async function getAll(){
 }
 */
 
+async function getBrand(){
+  const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
+  const db =  client.db(MONGODB_DB_NAME)
+
+  const collection = db.collection('products');
+  
+  const brand = await collection.distinct(brands).toArray();
+
+  //console.log(prods);
+  client.close();
+  return brand
+}
+
 async function getAll(){
   
   const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
@@ -69,14 +82,15 @@ app.get('/', (request, response) => {
   response.send({'ack': true});
 });
 
+app.get('/brands', async (request, response) => {
+  const brands = await getBrands()
+  response.send(brands);
+  
+})
+
 app.get('/products', async (request, response) => {
   const products = await getAll()
   response.send(products);
-  
-
-  //response.send(prods)
-
-  //response.send(products[0])
   
 })
 

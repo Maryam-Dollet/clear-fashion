@@ -1,3 +1,6 @@
+// Invoking strict mode https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode#invoking_strict_mode
+'use strict';
+
 
 
 /**
@@ -6,10 +9,10 @@
  * @param  {Number}  [size=12] - size of the page
  * @return {Object}
  */
-const fetchProducts = async (page = 1, size = 12) => {
+const fetchProducts = async () => {
     try {
       const response = await fetch(
-        `https://clear-fashion-api.vercel.app?page=${page}&size=${size}`
+        `https://clear-fashion-63uk4zzaz-maryamdollet-gmailcom.vercel.app/products`
       );
       const body = await response.json();
   
