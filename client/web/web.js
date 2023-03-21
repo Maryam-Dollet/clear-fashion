@@ -23,7 +23,7 @@ const setCurrentBrands = (result) => {
 const fetchProducts = async () => {
   try {
     const response = await fetch(
-     `https://clear-fashion-topaz-seven.vercel.app/products/search/?limit=100`
+     `https://clear-fashion-topaz-seven.vercel.app/products`
     );
     const body = await response.json();
   
