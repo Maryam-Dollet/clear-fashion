@@ -53,6 +53,20 @@ async function getAll(){
   return prods
 }
 
+async function getNumberProd(){
+  
+  const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
+  const db =  client.db(MONGODB_DB_NAME)
+
+  const collection = db.collection('products');
+  
+  const nbprods = await collection.find({}).countDocuments().toArray();
+
+  //console.log(prods);
+  client.close();
+  return nbprods
+}
+
 async function getId(id){
 
   const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
@@ -126,11 +140,18 @@ app.get('/products/search/', async (request, response) => {
 
 })
 
+app.get('/products/count', async (request, response) => {
+  const nbProducts = await getNumberProd()
+  response.send(nbProducts);
+
+})
+
 app.get('/products/:id', async (request, response) => {
   const products = await getId(request.params.id)
   response.send(products);
 
 })
+
 
 
 app.listen(PORT);

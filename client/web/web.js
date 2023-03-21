@@ -115,9 +115,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const p5 = paginate(products, 100, 1);
 
+  const pages = calculatePagesCount(100, products.length)
+
   console.log(products);
 
   console.log(p5);
+
+  console.log(pages)
 
   const brands = await fetchBrands();
   console.log(brands);
