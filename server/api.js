@@ -70,10 +70,15 @@ app.get('/', (request, response) => {
 });
 
 app.get('/products', async (request, response) => {
-  const products = await getAll()
+  //const products = await getAll()
   //response.send(products);
+  const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
+  const db =  client.db(MONGODB_DB_NAME)
 
-  response.send(products)
+  const collection = db.collection('products');
+  const prods = await collection.find({_id : new ObjectId(id)}).toArray();
+
+  response.send(prods)
 
  // response.send(products[0])
   
