@@ -76,7 +76,7 @@ app.get('/products', async (request, response) => {
   const db =  client.db(MONGODB_DB_NAME)
 
   const collection = db.collection('products');
-  const prods = await collection.find({_id : new ObjectId(id)}).toArray();
+  const prods = await collection.find({}).toArray();
 
   response.send(prods)
 
