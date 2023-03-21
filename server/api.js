@@ -60,7 +60,7 @@ async function getNumberProd(){
 
   const collection = db.collection('products');
   
-  const nbprods = await collection.countDocuments({}, { hint: "_id_" });
+  const nbprods = await collection.countDocuments({}, { hint: "_id" });
 
   //console.log(prods);
   client.close();
