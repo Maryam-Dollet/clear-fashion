@@ -34,6 +34,7 @@ const parse = data => {
           .attr('srcset')
         
         image = image.split(',')[1].split(' ')[0]
+        image = "https:" + image;
         
         const link = "https://shop.circlesportswear.com"+$(element)
         .find('.card__heading')
