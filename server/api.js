@@ -108,7 +108,7 @@ app.get('/products/search/', async (request, response) => {
   let sort =  { price: 1 }
 
   let filter = {};
-  if(desc==true){
+  if(desc=="true"){
     sort = { price: -1 }
   }
 
