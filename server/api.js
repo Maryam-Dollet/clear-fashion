@@ -60,11 +60,14 @@ async function getNumberProd(){
 
   const collection = db.collection('products');
   
-  const nbprods = await collection.countDocuments({}, { hint: "_id" });
+  const nbprods = await collection.countDocuments({}, { hint: "_id_" });
 
-  //console.log(prods);
+  var arr = {};
+  arr.count = nbprods;
+
+  console.log(arr);
   client.close();
-  return nbprods
+  return arr
 }
 
 async function getId(id){
@@ -95,6 +98,12 @@ app.options('*', cors());
 app.get('/', (request, response) => {
   response.send({'ack': true});
 });
+
+app.get('/count', async (request, response) => {
+  const nbProducts = await getNumberProd()
+  response.send(nbProducts);
+
+})
 
 app.get('/brands', async (request, response) => {
   const brands = await getBrands()
@@ -137,12 +146,6 @@ app.get('/products/search/', async (request, response) => {
   const prods = await collection.find(filter).sort(sort).limit(limit).toArray();
 
   response.send(prods)
-
-})
-
-app.get('/products/count', async (request, response) => {
-  const nbProducts = await getNumberProd()
-  response.send(nbProducts);
 
 })
 

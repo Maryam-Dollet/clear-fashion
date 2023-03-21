@@ -139,6 +139,21 @@ async function selectDate(){
 
 }
 
+async function getNumberProd(){
+  
+    const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
+    const db =  client.db(MONGODB_DB_NAME)
+  
+    const collection = db.collection('products');
+    
+    const nbprods = await collection.countDocuments({}, { hint: "_id_" });
+  
+    //console.log(prods);
+    client.close();
+    //console.log(nbprods)
+    return nbprods
+  }
+
 //findbrand('circlesportswear');
 
 //findprice(30);
@@ -150,11 +165,13 @@ async function selectDate(){
 //selectDate()
 
 //getAll()
-getId(new ObjectId("640756635a26b02b4e49f06d"))
+//getId(new ObjectId("640756635a26b02b4e49f06d"))
 //getId("640756635a26b02b4e49f06d")
 
 //console.log(getToday(removeTwoWeeks()))
 //console.log(getToday())
+
+//console.log(getNumberProd())
 
 //addprods();
 
