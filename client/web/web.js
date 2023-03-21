@@ -1,3 +1,5 @@
+
+
 /**
  * Fetch products from api
  * @param  {Number}  [page=1] - current page to fetch
