@@ -75,7 +75,7 @@ app.get('/products', async (request, response) => {
 
   response.send(products)
 
-  response.send(products[0])
+ // response.send(products[0])
   
 })
 
