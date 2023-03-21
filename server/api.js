@@ -32,7 +32,7 @@ async function getBrands(){
 
   const collection = db.collection('products');
   
-  const brand = await collection.distinct("brand");
+  const brand = await collection.distinct('brand');
 
   //console.log(prods);
   client.close();
