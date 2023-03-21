@@ -99,12 +99,6 @@ app.get('/', (request, response) => {
   response.send({'ack': true});
 });
 
-app.get('/count', async (request, response) => {
-  const nbProducts = await getNumberProd()
-  response.send(nbProducts);
-
-})
-
 app.get('/brands', async (request, response) => {
   const brands = await getBrands()
   response.send(brands);
@@ -115,6 +109,12 @@ app.get('/products', async (request, response) => {
   const products = await getAll()
   response.send(products);
   
+})
+
+app.get('/products/count/', async (request, response) => {
+  const nbProducts = await getNumberProd()
+  response.send(nbProducts);
+
 })
 
 app.get('/products/search/', async (request, response) => {
