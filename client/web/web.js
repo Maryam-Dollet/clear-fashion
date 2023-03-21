@@ -5,6 +5,15 @@ let currentProducts = [];
 let currentPagination = {};
 let currentBrands = [];
 
+// instantiate the selectors
+const sectionBrands = document.querySelector('#brands');
+const sectionProducts = document.querySelector('#products');
+
+const setCurrentBrands = (result) => {
+  result.unshift("");
+  currentBrands = result;
+}
+
 /**
  * Fetch products from api
  * @param  {Number}  [page=1] - current page to fetch
@@ -18,17 +27,14 @@ const fetchProducts = async () => {
     );
     const body = await response.json();
   
-    if (body.success !== true) {
-      console.error(body);
-      return {currentProducts, currentPagination};
-    }
-  
-  return body.data;
+    return body;
+
     } catch (error) {
     console.error(error);
     return {currentProducts, currentPagination};
   }
 };
+
 
 const fetchBrands = async () => {
   try {
@@ -37,26 +43,33 @@ const fetchBrands = async () => {
     );
     const body = await response.json();
 
-    if (body.success !== true) {
-      console.error(body);
-      return {currentBrands};
-    }
+    return body;
 
-    return body.data.result;
   } catch (error) {
     console.error(error);
     return {currentBrands};
   }
 };
 
-const renderBrands = brands => {
+const renderProducts = products => {
   const fragment = document.createDocumentFragment();
   const div = document.createElement('div');
-  const template = brands
+  const template = products
     .map(product => {
       return `
-      <div>
-        ${product}
+      <div class="product" id=${product.uuid}>
+        <div class="col">
+          <img src=${product.photo}>
+        </div>
+        <div class="col">
+          <pre>
+            <span class="underline"><font size="+3">${product.brand}</font></span>
+            <a href="${product.link}" target="_blank" rel="noopener noreferrer">${product.name}</a>
+            price : ${product.price} €
+            release date : <span class="date">${product.released}</span>
+            <button id=${product.uuid} type="button" onclick="addToFavorites(this.id)">Add to favorites</button>
+          </pre>
+        </div>
       </div>
      `;
     })
@@ -68,10 +81,34 @@ const renderBrands = brands => {
   sectionProducts.appendChild(fragment);
 };
 
-document.addEventListener('DOMContentLoaded', async () => {
-  //const products = await fetchProducts();
-  const brands = await fetchBrands();
+const renderBrands = brands => {
+  const fragment = document.createDocumentFragment();
+  const div = document.createElement('div');
+  const template = brands
+    .map(brand => {
+      return `
+      <div>
+        ${brand}
+      </div>
+     `;
+    })
+    .join('');
 
+  div.innerHTML = template;
+  fragment.appendChild(div);
+  sectionBrands.innerHTML = '<h2>Brands</h2>';
+  sectionBrands.appendChild(fragment);
+};
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const products = await fetchProducts();
+
+  console.log(products)
+
+  const brands = await fetchBrands();
+  console.log(brands)
+  setCurrentBrands(brands)
+  renderBrands(brands)
   
 
 });
