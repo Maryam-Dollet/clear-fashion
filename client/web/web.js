@@ -23,7 +23,7 @@ const setCurrentBrands = (result) => {
 const fetchProducts = async () => {
   try {
     const response = await fetch(
-     `https://clear-fashion-topaz-seven.vercel.app/products`
+     `https://clear-fashion-topaz-seven.vercel.app/products/search/`
     );
     const body = await response.json();
   
@@ -58,9 +58,17 @@ const renderProducts = products => {
     .map(product => {
       return `
       <div class="product" id=${product._id}>
-        <span>${product.brand}</span>
-        <a href="${product.link}">${product.name}</a>
-        <span>${product.price}</span>
+        <div class="col">
+          <img src=${product.image}>
+        </div>
+        <div class="col">
+          <pre>
+            <span class="underline"><font size="+3">${product.brand}</font></span>
+            <a href="${product.link}" target="_blank" rel="noopener noreferrer">${product.name}</a>
+            price : ${product.price} €
+            release date : <span class="date">${product.date}</span>
+          </pre>
+        </div>
       </div>
      `;
     })
