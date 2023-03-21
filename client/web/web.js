@@ -4,10 +4,24 @@
 let currentProducts = [];
 let currentPagination = {};
 let currentBrands = [];
+//let count = {}
 
 // instantiate the selectors
 const sectionBrands = document.querySelector('#brands');
 const sectionProducts = document.querySelector('#products');
+
+const selectShow = document.querySelector('#show-select');
+const selectBrand = document.querySelector('#brand-select');
+
+var numberOfBrands = document.getElementById("nbBrands");
+
+const setCurrentProducts = (result, pagecount, page, pagesize) => {
+  currentProducts = result;
+  currentPagination.pageCount = pagecount;
+  currentPagination.pageSize = pagesize
+  currentPagination.page = page
+  //currentPagination.brand = "";
+};
 
 const setCurrentBrands = (result) => {
   result.unshift("");
@@ -35,6 +49,20 @@ const fetchProducts = async () => {
   }
 };
 
+const fetchCount = async () => {
+  try {
+    const response = await fetch(
+      `https://clear-fashion-topaz-seven.vercel.app/count`
+    );
+    const body = await response.json();
+
+    return body;
+
+  } catch (error) {
+    console.error(error);
+    return {count};
+  }
+};
 
 const fetchBrands = async () => {
   try {
@@ -97,7 +125,14 @@ const renderBrands = brands => {
   fragment.appendChild(div);
   sectionBrands.innerHTML = '<h2>Brands</h2>';
   sectionBrands.appendChild(fragment);
+
+  const options = Array.from(brands, x => `<option value="${x}">${x}</option>`);
+  selectBrand.innerHTML = options;
+  numberOfBrands.innerHTML = brands.length - 1;
+
 };
+
+// Calculate pagination //
 
 function paginate(array, page_size, page_number) {
   // human-readable page numbers usually start with 1, so we reduce 1 in the first argument
@@ -109,26 +144,99 @@ const calculatePagesCount = (pageSize, totalCount) => {
   return totalCount < pageSize ? 1 : Math.ceil(totalCount / pageSize);
 };
 
+// Navigation //
+
+function nextPage(){
+  if(currentPagination.page+1<=currentPagination.pageCount){
+  currentPagination.page ++;
+
+  const p5 = paginate(currentProducts, currentPagination.pageSize, currentPagination.page);
+  setCurrentProducts(currentProducts, currentPagination.pageCount, currentPagination.page, currentPagination.pageSize);
+
+  renderProducts(p5);
+
+  showPageInfo();
+  }
+}
+
+function previous(){
+  if(currentPagination.page-1 > 0){
+    currentPagination.page --;
+
+  const p5 = paginate(currentProducts, currentPagination.pageSize, currentPagination.page);
+  setCurrentProducts(currentProducts, currentPagination.pageCount, currentPagination.page, currentPagination.pageSize);
+
+  renderProducts(p5);
+
+  showPageInfo();
+  }
+}
+
+function firstPage(){
+  if(currentPagination.page != 1){
+  currentPagination.page = 1;
+
+  const p5 = paginate(currentProducts, currentPagination.pageSize, currentPagination.page);
+  setCurrentProducts(currentProducts, currentPagination.pageCount, currentPagination.page, currentPagination.pageSize);
+
+  renderProducts(p5);
+
+  showPageInfo();
+  }
+}
+
+function lastPage(){
+  if(currentPagination.page != currentPagination.pageCount){
+  currentPagination.page = currentPagination.pageCount;
+
+  const p5 = paginate(currentProducts, currentPagination.pageSize, currentPagination.page);
+  setCurrentProducts(currentProducts, currentPagination.pageCount, currentPagination.page, currentPagination.pageSize);
+
+  renderProducts(p5);
+
+  showPageInfo();
+  }
+}
+
+function showPageInfo(){
+  document.getElementById('pageInfo').innerHTML = `
+    Page ${currentPagination.page} / ${currentPagination.pageCount}
+  `
+}
+
+// Listeners //
+
+selectShow.addEventListener('change', async (event) => {
+  var pageSize = parseInt(event.target.value)
+
+  const p5 = paginate(currentProducts, pageSize, 1);
+  const pagecount = calculatePagesCount(pageSize, currentProducts.length)
+
+  setCurrentProducts(currentProducts, pagecount, 1, pageSize);
+
+  renderProducts(p5);
+
+  showPageInfo();
+});
+
+// Load Page //
 
 document.addEventListener('DOMContentLoaded', async () => {
   const products = await fetchProducts();
+  const nbprods = await fetchCount();
 
-  const p5 = paginate(products, 100, 1);
-
-  const pages = calculatePagesCount(100, products.length)
-
-  console.log(products);
-
-  console.log(p5);
-
-  console.log(pages)
+  const p5 = paginate(products, 12, 1);
+  const pagecount = calculatePagesCount(12, nbprods.count)
 
   const brands = await fetchBrands();
-  console.log(brands);
+
+  setCurrentProducts(products, pagecount, 1, 12);
   setCurrentBrands(brands);
+
   renderBrands(brands);
-  renderProducts(products);
+  renderProducts(p5);
   
+  showPageInfo();
 
 });
 

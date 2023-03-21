@@ -21,10 +21,6 @@
           <option value="222">all</option>
         </select>
       </div>
-      <div id="page">
-        <label for="page-select">Go to page:</label>
-        <select name="page" id="page-select"> </select>
-      </div>
       <div id="filters">
         <div id="reasonable">
           <label for="reasonable-price">By reasonable price</label>
@@ -92,6 +88,14 @@
     </section>
     <section id="brands"></section>
     <section id="products"></section>
+    <div>
+      <button class="btn" onclick="firstPage()">|<</button>
+          <button class="btn" onclick="previous()">
+            <</button>
+              <span id="pageInfo"></span>
+              <button class="btn" onclick="nextPage()">></button>
+              <button class="btn" onclick="lastPage()">>|</button>
+    </div>
     <script type="text/javascript" charset="UTF-8" src="web.js"></script>
   </body>
 </html>
