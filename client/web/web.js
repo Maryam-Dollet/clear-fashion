@@ -34,10 +34,10 @@ const setCurrentBrands = (result) => {
  * @param  {Number}  [size=12] - size of the page
  * @return {Object}
  */
-const fetchProducts = async () => {
+const fetchProducts = async (brand = "", descOrder="") => {
   try {
     const response = await fetch(
-     `https://clear-fashion-topaz-seven.vercel.app/products/search`
+     `https://clear-fashion-topaz-seven.vercel.app/products/search/?brand=${brand}&desc=${descOrder}`
     );
     const body = await response.json();
   
@@ -52,7 +52,7 @@ const fetchProducts = async () => {
 const fetchCount = async () => {
   try {
     const response = await fetch(
-      `https://clear-fashion-topaz-seven.vercel.app/count`
+      `https://clear-fashion-topaz-seven.vercel.app/products/count`
     );
     const body = await response.json();
 
@@ -213,6 +213,21 @@ selectShow.addEventListener('change', async (event) => {
   const pagecount = calculatePagesCount(pageSize, currentProducts.length)
 
   setCurrentProducts(currentProducts, pagecount, 1, pageSize);
+
+  renderProducts(p5);
+
+  showPageInfo();
+});
+
+selectBrand.addEventListener('change', async (event) => {
+  var brand = event.target.value
+
+  const products = await fetchProducts(brand, "")
+
+  const p5 = paginate(products, currentPagination.pageSize, 1);
+  const pagecount = calculatePagesCount(currentPagination.pageSize, products.length)
+
+  setCurrentProducts(currentProducts, pagecount, 1, currentPagination.pageSize);
 
   renderProducts(p5);
 
