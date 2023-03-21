@@ -23,7 +23,7 @@ const setCurrentBrands = (result) => {
 const fetchProducts = async () => {
   try {
     const response = await fetch(
-     `https://clear-fashion-topaz-seven.vercel.app/products`
+     `https://clear-fashion-topaz-seven.vercel.app/products/search`
     );
     const body = await response.json();
   
@@ -99,16 +99,31 @@ const renderBrands = brands => {
   sectionBrands.appendChild(fragment);
 };
 
+function paginate(array, page_size, page_number) {
+  // human-readable page numbers usually start with 1, so we reduce 1 in the first argument
+  return array.slice((page_number - 1) * page_size, page_number * page_size);
+}
+
+const calculatePagesCount = (pageSize, totalCount) => {
+  // we suppose that if we have 0 items we want 1 empty page
+  return totalCount < pageSize ? 1 : Math.ceil(totalCount / pageSize);
+};
+
+
 document.addEventListener('DOMContentLoaded', async () => {
   const products = await fetchProducts();
 
-  console.log(products)
+  const p5 = paginate(products, 100, 1);
+
+  console.log(products);
+
+  console.log(p5);
 
   const brands = await fetchBrands();
-  console.log(brands)
-  setCurrentBrands(brands)
-  renderBrands(brands)
-  renderProducts(products)
+  console.log(brands);
+  setCurrentBrands(brands);
+  renderBrands(brands);
+  renderProducts(products);
   
 
 });
