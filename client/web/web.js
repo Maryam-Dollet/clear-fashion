@@ -209,6 +209,8 @@ function showPageInfo(){
 selectShow.addEventListener('change', async (event) => {
   var pageSize = parseInt(event.target.value)
 
+  //const products = await fetchProducts();
+
   const p5 = paginate(currentProducts, pageSize, 1);
   const pagecount = calculatePagesCount(pageSize, currentProducts.length)
 
@@ -220,14 +222,21 @@ selectShow.addEventListener('change', async (event) => {
 });
 
 selectBrand.addEventListener('change', async (event) => {
-  var brand = event.target.value
+  const brand = event.target.value;
+  console.log(brand)
 
-  const products = await fetchProducts(brand, "")
-
+  let products = [];
+  if (brand == ""){
+    products = await fetchProducts();
+  }
+  else{
+    products = await fetchProducts(brand, "");
+  }
+  console.log(products)
   const p5 = paginate(products, currentPagination.pageSize, 1);
   const pagecount = calculatePagesCount(currentPagination.pageSize, products.length)
 
-  setCurrentProducts(currentProducts, pagecount, 1, currentPagination.pageSize);
+  setCurrentProducts(products, pagecount, 1, currentPagination.pageSize);
 
   renderProducts(p5);
 
