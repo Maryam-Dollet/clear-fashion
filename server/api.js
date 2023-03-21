@@ -26,7 +26,7 @@ async function getAll(){
 }
 */
 
-async function getBrand(){
+async function getBrands(){
   const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
   const db =  client.db(MONGODB_DB_NAME)
 
