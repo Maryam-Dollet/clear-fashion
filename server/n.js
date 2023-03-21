@@ -1,7 +1,9 @@
 const {MongoClient} = require('mongodb');
+var ObjectId = require('mongodb').ObjectId;
+
 const products = require("./output.json")
 
-const MONGODB_URI = "mongodb+srv://maryam:<password>@cluster0.kolklxw.mongodb.net/?retryWrites=true&w=majority";
+const MONGODB_URI = "mongodb+srv://maryam:jsonapi@cluster0.kolklxw.mongodb.net/?retryWrites=true&w=majority";
 const MONGODB_DB_NAME = 'clearfashion';
 
 function getToday(date = new Date()){
@@ -40,6 +42,30 @@ async function addprods(){
     console.log(result);
 
     client.close();
+}
+
+async function getAll(){
+    const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
+    const db =  client.db(MONGODB_DB_NAME)
+
+    const collection = db.collection('products');
+    const prods = await collection.find({}).toArray();
+
+    console.log(prods);
+    client.close();
+}
+
+async function getId(id){
+
+    const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
+    const db =  client.db(MONGODB_DB_NAME)
+
+    const collection = db.collection('products');
+    const prods = await collection.find({_id : id}).toArray();
+
+    console.log(prods);
+    client.close();
+
 }
 
 async function findbrand(brand){
@@ -121,8 +147,11 @@ async function selectDate(){
 
 //dateSort();
 
-selectDate()
+//selectDate()
 
+//getAll()
+getId(new ObjectId("640756635a26b02b4e49f06d"))
+//getId("640756635a26b02b4e49f06d")
 
 //console.log(getToday(removeTwoWeeks()))
 //console.log(getToday())
