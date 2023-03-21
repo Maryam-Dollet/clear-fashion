@@ -11,11 +11,29 @@ var ObjectId = require('mongodb').ObjectId;
 const MONGODB_URI = "mongodb+srv://maryam:jsonapi@cluster0.kolklxw.mongodb.net/?retryWrites=true&w=majority";
 const MONGODB_DB_NAME = 'clearfashion';
 
+/*
+async function connectToDB(){
+
+}
+
+
 async function getAll(){
   const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
   const db =  client.db(MONGODB_DB_NAME)
 
   const collection = db.collection('products');
+
+  return collection;
+}
+*/
+
+async function getAll(){
+  
+  const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
+  const db =  client.db(MONGODB_DB_NAME)
+
+  const collection = db.collection('products');
+  
   const prods = await collection.find({}).toArray();
 
   //console.log(prods);
@@ -56,16 +74,21 @@ app.get('/products', async (request, response) => {
   const products = await getAll()
   //response.send(products);
 
+  response.send(products)
+
   response.send(products[0])
   
 })
 
 app.get('/products/search/', async (request, response) => {
   const filters = request.query;
+
+
   //const filters = request.query.brand
   //const products = await getAll()
+
   const brand = request.query.brand;
-  const price = request.query.price;
+  const price = parseInt(request.query.price);
   var limit = parseInt(request.query.limit) || 12;
 
   let filter = {};
@@ -75,7 +98,8 @@ app.get('/products/search/', async (request, response) => {
     filter.brand = brand;
   }
   if(price){
-    filter.price = price
+    filter.price = {$lte : price}
+
   }
   
   const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
@@ -94,6 +118,7 @@ app.get('/products/:id', async (request, response) => {
 
 })
 
+
 app.listen(PORT);
 
-console.log(`📡 Running on port ${PORT}`);
+console.log(`📡 Running on port ${PORT}`)
