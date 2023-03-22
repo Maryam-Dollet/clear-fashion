@@ -270,8 +270,6 @@ function showPageInfo(){
 selectShow.addEventListener('change', async (event) => {
   var pageSize = parseInt(event.target.value)
 
-  //const products = await fetchProducts();
-
   const p5 = paginate(currentProducts, pageSize, 1);
   const pagecount = calculatePagesCount(pageSize, currentProducts.length)
 
