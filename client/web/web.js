@@ -15,6 +15,11 @@ const selectShow = document.querySelector('#show-select');
 const selectBrand = document.querySelector('#brand-select');
 
 var numberOfBrands = document.getElementById("nbBrands");
+var numberOfRecent = document.getElementById("nbNewProds");
+var p50 = document.getElementById("p50");
+var p90 = document.getElementById("p90");
+var p95 = document.getElementById("p95");
+var recentDate = document.getElementById("recent-date");
 
 const setCurrentProducts = (result, pagecount, page, pagesize) => {
   currentProducts = result;
@@ -132,6 +137,43 @@ const renderBrands = brands => {
   numberOfBrands.innerHTML = brands.length - 1;
 
 };
+
+// Sorts //
+
+const sortByDate = products => {
+  const sortedprods = products.sort((a,b) => new Date(a.date)- new Date(b.date));
+  return sortedprods;
+};
+
+// Indicators //
+
+const getMostRecentdate = async(prods) => {
+  var date = sortByDate(prods).reverse()[0].date;
+  recentDate.innerHTML = date;
+}
+
+const p_value = (products, q) => {
+  var pvalue
+  products.shift();
+  q = q/100;
+  var pos = ((products.length)-1)*q;
+  var base = Math.floor(pos);
+  var rest = pos - base;
+
+  if ((products[base+1].price !== undefined)){
+    pvalue = products[base].price + rest * (products[base+1].price-products[base].price);
+  }
+  else{
+    pvalue =  products[base].price;
+  }
+  return Math.round(pvalue * 100) / 100;
+}
+
+const Pvalues = async(prods) =>{
+  p50.innerHTML = p_value(prods, 50);
+  p90.innerHTML = p_value(prods, 90);
+  p95.innerHTML = p_value(prods, 95);
+}
 
 // Calculate pagination //
 
@@ -259,6 +301,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   const pagecount = calculatePagesCount(12, nbprods.count)
 
   const brands = await fetchBrands();
+  console.log(products.slice(0, 3))
+
+  getMostRecentdate(products);
+  Pvalues(products);
 
   setCurrentProducts(products, pagecount, 1, 12);
   setCurrentBrands(brands);
