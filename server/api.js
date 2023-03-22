@@ -128,12 +128,19 @@ app.get('/products/search/', async (request, response) => {
   const desc = request.query.desc;
   const price = parseInt(request.query.price);
   const gender = request.query.gender
+  const dateOrder = request.query.dateOrder;
   var limit = parseInt(request.query.limit);
 
   let filter = {};
   var sort = { price: 1 }
   if(desc == "true"){
     sort =  { price: -1 }
+  }
+  if(dateOrder == "asc"){
+    sort.date = 1;
+  }
+  if(dateOrder == "desc"){
+    sort.date = -1;
   }
 
   if(brand){
