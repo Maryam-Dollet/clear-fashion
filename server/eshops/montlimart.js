@@ -6,7 +6,7 @@ const cheerio = require('cheerio');
  * @param  {String} data - html response
  * @return {Array} products
  */
-const parse = data => {
+const parse = (data, selectedGender) => {
     const $ = cheerio.load(data);
   
     return $('.products-list .products-list__block')
@@ -42,11 +42,13 @@ const parse = data => {
 
         const brand = "montlimart"
 
+        const gender = selectedGender;
+
         const datelist = ["2023-02-24","2023-02-18","2023-02-05","2023-03-03","2023-03-07"];
         const random = Math.floor(Math.random() * datelist.length);
         const date = datelist[random];
   
-        return {name, price, image, brand, date, link};
+        return {name, price, image, brand,gender, date, link};
       })
       .get();
   };
@@ -56,14 +58,14 @@ const parse = data => {
    * @param  {[type]}  url
    * @return {Array|null}
    */
-  module.exports.scrape = async url => {
+  module.exports.scrape = async (url, gender) => {
     try {
       const response = await fetch(url);
   
       if (response.ok) {
         const body = await response.text();
   
-        return parse(body);
+        return parse(body, gender);
       }
   
       console.error(response);

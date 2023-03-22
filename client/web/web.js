@@ -4,6 +4,7 @@
 let currentProducts = [];
 let currentPagination = {};
 let currentBrands = [];
+let selectedbrand = ""
 //let count = {}
 
 // instantiate the selectors
@@ -156,6 +157,7 @@ function nextPage(){
   renderProducts(p5);
 
   showPageInfo();
+  sectionProducts.scrollIntoView({ behavior: "smooth" })
   }
 }
 
@@ -169,6 +171,7 @@ function previous(){
   renderProducts(p5);
 
   showPageInfo();
+  sectionProducts.scrollIntoView({ behavior: "smooth" })
   }
 }
 
@@ -182,6 +185,7 @@ function firstPage(){
   renderProducts(p5);
 
   showPageInfo();
+  sectionProducts.scrollIntoView({ behavior: "smooth" })
   }
 }
 
@@ -195,6 +199,7 @@ function lastPage(){
   renderProducts(p5);
 
   showPageInfo();
+  sectionProducts.scrollIntoView({ behavior: "smooth" })
   }
 }
 

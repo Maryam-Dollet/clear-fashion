@@ -6,6 +6,7 @@ const dedicatedbrand = require('./eshops/dedicatedbrand');
 const circlesportswear = require('./eshops/circlesportswear');
 const montlimart = require('./eshops/montlimart');
 //const { json } = require("express");
+var gender = "";
 
 function saveJson(obj){
   fs.writeFile("output.json", obj, 'utf8', function (err) {
@@ -18,11 +19,11 @@ function saveJson(obj){
   });
 }
 
-async function sandbox(eshop = 'https://www.dedicatedbrand.com/en/men/all-men?p=2') {
+async function sandbox(eshop = 'https://www.dedicatedbrand.com/en/men/all-men?p=2', gender) {
   try {
     console.log(`🕵️‍♀️  browsing ${eshop} eshop`);
 
-    const products = await dedicatedbrand.scrape(eshop);
+    const products = await dedicatedbrand.scrape(eshop, gender);
 
     console.log(products);
     console.log('done');
@@ -37,18 +38,20 @@ async function sandbox(eshop = 'https://www.dedicatedbrand.com/en/men/all-men?p=
 
 async function dedicatedDEDICATED(){
   var products = []
+  gender = "men";
   for (let i = 1; i <= 16; i++) {
     link = "https://www.dedicatedbrand.com/en/men/all-men?p="+i
     /*
     console.log(`🕵️‍♀️  browsing ${link} eshop`);
     var partprod = dedicatedbrand.scrape(link)*/
-    var partprod = sandbox(link)
+    var partprod = sandbox(link, gender)
     var slices = await partprod
     products = products.concat(slices)
   }
+  gender = "women";
   for (let i = 1; i <= 16; i++){
     link = "https://www.dedicatedbrand.com/en/women/all-women?p="+i
-    var partprod = sandbox(link)
+    var partprod = sandbox(link, gender)
     var slices = await partprod
     products = products.concat(slices)
   }
@@ -100,22 +103,22 @@ async function sandboxall (eshop1 = 'https://www.dedicatedbrand.com', eshop2 = '
     console.log('done');
 
     console.log(`🕵️‍♀️  parse ${eshop2} eshop femmes`);
-
-    const products2 = await circlesportswear.scrape('https://shop.circlesportswear.com/collections/collection-femme');
+    gender = "women";
+    const products2 = await circlesportswear.scrape('https://shop.circlesportswear.com/collections/collection-femme', gender);
 
     console.log(products2);
     console.log('done');
 
     console.log(`🕵️‍♀️  parse ${eshop2} eshop hommes`);
-
-    const products2_2 = await circlesportswear.scrape('https://shop.circlesportswear.com/collections/collection-homme');
+    gender = "men"
+    const products2_2 = await circlesportswear.scrape('https://shop.circlesportswear.com/collections/collection-homme', gender);
 
     console.log(products2_2);
     console.log('done');
 
     console.log(`🕵️‍♀️  parse ${eshop3} eshop`);
 
-    const products3 = await montlimart.scrape(eshop3);
+    const products3 = await montlimart.scrape(eshop3, gender);
 
     console.log(products3);
     console.log('done');
