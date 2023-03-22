@@ -51,15 +51,19 @@
           </select>
         </div>
       </div>
-      <div id="sort">
-        <label for="sort-select">Sort:</label>
-        <select class="custom-select" name="sort" id="sort-select">
-          <option value=""></option>
-          <option value="price-asc">Cheaper</option>
+      <div id="sort1">
+        <label for="sort-price">Sort by price:</label>
+        <select class="custom-select" name="sort" id="sort-price">
+          <option value="price-asc">Cheapest</option>
           <option value="price-desc">Expensive</option>
+        </select>
+      </div>
+      <div id="sort2">
+        <label for="sort-date">Sort by date:</label>
+        <select class="custom-select" name="sort" id="sort-date">
+          <option value=""></option>
           <option value="date-asc">Recently released</option>
           <option value="date-desc">Anciently released</option>
-          <option value="fav-prod">Favorites</option>
         </select>
       </div>
     </section>
