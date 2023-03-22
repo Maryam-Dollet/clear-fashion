@@ -4,7 +4,7 @@
 let currentProducts = [];
 let currentPagination = {};
 let currentBrands = [];
-let selectedbrand = ""
+let selectors = {};
 //let count = {}
 
 // instantiate the selectors
@@ -35,10 +35,10 @@ const setCurrentBrands = (result) => {
  * @param  {Number}  [size=12] - size of the page
  * @return {Object}
  */
-const fetchProducts = async (brand = "", descOrder="") => {
+const fetchProducts = async (brand = "", descOrder="", gender="") => {
   try {
     const response = await fetch(
-     `https://clear-fashion-topaz-seven.vercel.app/products/search/?brand=${brand}&desc=${descOrder}`
+     `https://clear-fashion-topaz-seven.vercel.app/products/search/?brand=${brand}&desc=${descOrder}&gender=${gender}`
     );
     const body = await response.json();
   
@@ -229,13 +229,14 @@ selectShow.addEventListener('change', async (event) => {
 selectBrand.addEventListener('change', async (event) => {
   const brand = event.target.value;
   console.log(brand)
+  selectors.brand = brand;
 
   let products = [];
   if (brand == ""){
     products = await fetchProducts();
   }
   else{
-    products = await fetchProducts(brand, "");
+    products = await fetchProducts(selectors.brand, "", "");
   }
   console.log(products)
   const p5 = paginate(products, currentPagination.pageSize, 1);
