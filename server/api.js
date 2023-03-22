@@ -125,22 +125,21 @@ app.get('/products/search/', async (request, response) => {
   //const products = await getAll()
 
   const brand = request.query.brand;
-  const desc = request.query.desc;
+  const order = request.query.order;
   const price = parseInt(request.query.price);
-  const gender = request.query.gender
-  const dateOrder = request.query.dateOrder;
+  const gender = request.query.gender;
   var limit = parseInt(request.query.limit);
 
   let filter = {};
   var sort = { price: 1 }
-  if(desc == "true"){
+  if(order == "true"){
     sort =  { price: -1 }
   }
-  if(dateOrder == "asc"){
-    sort.date = 1;
+  if(order == "asc"){
+    sort = {date : 1};
   }
-  if(dateOrder == "desc"){
-    sort.date = -1;
+  if(order == "desc"){
+    sort = {date : -1};
   }
 
   if(brand){
