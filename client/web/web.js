@@ -6,7 +6,7 @@ var dateToday = Date.now();
 let currentProducts = [];
 let currentPagination = {};
 let currentBrands = [];
-let selectors = {};
+let selectors = {brand: "", descOrder:"", gender:""};
 //let count = {}
 
 // instantiate the selectors
@@ -15,6 +15,7 @@ const sectionProducts = document.querySelector('#products');
 
 const selectShow = document.querySelector('#show-select');
 const selectBrand = document.querySelector('#brand-select');
+const selectGender = document.querySelector('#gender-select');
 
 var spanNbProducts = document.querySelector('#nbProducts');
 var numberOfBrands = document.getElementById("nbBrands");
@@ -285,13 +286,26 @@ selectBrand.addEventListener('change', async (event) => {
   console.log(brand)
   selectors.brand = brand;
 
-  let products = [];
-  if (brand == ""){
-    products = await fetchProducts();
-  }
-  else{
-    products = await fetchProducts(selectors.brand, "", "");
-  }
+  let products = await fetchProducts(selectors.brand, selectors.descOrder, selectors.gender);
+
+  console.log(products)
+  const p5 = paginate(products, currentPagination.pageSize, 1);
+  const pagecount = calculatePagesCount(currentPagination.pageSize, products.length)
+
+  setCurrentProducts(products, pagecount, 1, currentPagination.pageSize);
+
+  renderProducts(p5);
+
+  showPageInfo();
+});
+
+selectGender.addEventListener('change', async (event) => {
+  const gender = event.target.value;
+  console.log(gender)
+  selectors.gender = gender;
+
+  let products = await fetchProducts(selectors.brand, selectors.descOrder, selectors.gender);
+  
   console.log(products)
   const p5 = paginate(products, currentPagination.pageSize, 1);
   const pagecount = calculatePagesCount(currentPagination.pageSize, products.length)
