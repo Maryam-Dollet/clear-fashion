@@ -1,6 +1,8 @@
 // Invoking strict mode https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode#invoking_strict_mode
 'use strict';
 
+var dateToday = Date.now();
+
 let currentProducts = [];
 let currentPagination = {};
 let currentBrands = [];
@@ -14,6 +16,7 @@ const sectionProducts = document.querySelector('#products');
 const selectShow = document.querySelector('#show-select');
 const selectBrand = document.querySelector('#brand-select');
 
+var spanNbProducts = document.querySelector('#nbProducts');
 var numberOfBrands = document.getElementById("nbBrands");
 var numberOfRecent = document.getElementById("nbNewProds");
 var p50 = document.getElementById("p50");
@@ -138,6 +141,13 @@ const renderBrands = brands => {
 
 };
 
+// Filters //
+
+const filterRecentProducts = products => {
+  const filteredprods = products.filter(product => (dateToday - new Date(product.date))/(1000*60*60*24) <= 20);
+  return filteredprods;
+};
+
 // Sorts //
 
 const sortByDate = products => {
@@ -147,9 +157,11 @@ const sortByDate = products => {
 
 // Indicators //
 
-const getMostRecentdate = async(prods) => {
+const getIndicators = async(prods) => {
   var date = sortByDate(prods).reverse()[0].date;
   recentDate.innerHTML = date;
+  spanNbProducts.innerHTML  = prods.length;
+  numberOfRecent.innerHTML = filterRecentProducts(prods).length
 }
 
 const p_value = (products, q) => {
@@ -301,9 +313,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const pagecount = calculatePagesCount(12, nbprods.count)
 
   const brands = await fetchBrands();
-  console.log(products.slice(0, 3))
 
-  getMostRecentdate(products);
+  getIndicators(products);
   Pvalues(products);
 
   setCurrentProducts(products, pagecount, 1, 12);
