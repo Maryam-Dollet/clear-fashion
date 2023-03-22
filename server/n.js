@@ -154,7 +154,7 @@ async function getNumberProd(){
     return nbprods
   }
 
-findbrand('circlesportswear');
+//findbrand('circlesportswear');
 
 //findprice(30);
 
@@ -173,5 +173,5 @@ findbrand('circlesportswear');
 
 //console.log(getNumberProd())
 
-//addprods();
+addprods();
 

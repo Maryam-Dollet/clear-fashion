@@ -127,6 +127,7 @@ app.get('/products/search/', async (request, response) => {
   const brand = request.query.brand;
   const desc = request.query.desc;
   const price = parseInt(request.query.price);
+  const gender = request.query.gender
   var limit = parseInt(request.query.limit);
 
   let filter = {};
@@ -139,8 +140,11 @@ app.get('/products/search/', async (request, response) => {
     filter.brand = brand;
   }
   if(price){
-    filter.price = {$lte : price}
+    filter.price = {$lte : price};
 
+  }
+  if(gender){
+    filter.gender = gender;
   }
   
   const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
