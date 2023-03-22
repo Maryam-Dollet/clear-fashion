@@ -173,5 +173,5 @@ async function getNumberProd(){
 
 //console.log(getNumberProd())
 
-addprods();
+//addprods();
 
