@@ -318,7 +318,7 @@ selectGender.addEventListener('change', async (event) => {
   showPageInfo();
 });
 
-selectGender.addEventListener('change', async (event) => {
+selectSort.addEventListener('change', async (event) => {
   const sort = event.target.value;
   console.log(sort)
   selectors.descOrder = sort;
