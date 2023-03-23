@@ -347,9 +347,9 @@ selectReasonable.addEventListener('change', async (event) => {
 
   let products = await fetchProducts(selectors.brand, selectors.descOrder, selectors.gender, selectors.date, selectors.price);
   
-  console.log(products)
+  console.log(products);
   const p5 = paginate(products, currentPagination.pageSize, 1);
-  const pagecount = calculatePagesCount(currentPagination.pageSize, products.length)
+  const pagecount = calculatePagesCount(currentPagination.pageSize, products.length);
 
   setCurrentProducts(products, pagecount, 1, currentPagination.pageSize);
 
@@ -365,9 +365,9 @@ selectRecently.addEventListener('change', async (event) => {
 
   let products = await fetchProducts(selectors.brand, selectors.descOrder, selectors.gender, selectors.date, selectors.price);
   
-  console.log(products)
+  console.log(products);
   const p5 = paginate(products, currentPagination.pageSize, 1);
-  const pagecount = calculatePagesCount(currentPagination.pageSize, products.length)
+  const pagecount = calculatePagesCount(currentPagination.pageSize, products.length);
 
   setCurrentProducts(products, pagecount, 1, currentPagination.pageSize);
 
