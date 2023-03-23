@@ -6,7 +6,7 @@ var dateToday = Date.now();
 let currentProducts = [];
 let currentPagination = {};
 let currentBrands = [];
-let selectors = {brand: "", descOrder:"", gender:""};
+let selectors = {brand: "", descOrder:"", gender:"", price:"", date:""};
 //let count = {}
 
 // instantiate the selectors
@@ -17,6 +17,9 @@ const selectShow = document.querySelector('#show-select');
 const selectBrand = document.querySelector('#brand-select');
 const selectGender = document.querySelector('#gender-select');
 const selectSort = document.querySelector('#sort-select');
+
+const selectReasonable = document.querySelector('#reasonable-price')
+const selectRecently = document.querySelector('#recently-released')
 
 var spanNbProducts = document.querySelector('#nbProducts');
 var numberOfBrands = document.getElementById("nbBrands");
@@ -45,10 +48,10 @@ const setCurrentBrands = (result) => {
  * @param  {Number}  [size=12] - size of the page
  * @return {Object}
  */
-const fetchProducts = async (brand = "", descOrder="", gender="") => {
+const fetchProducts = async (brand = "", descOrder="", gender="", price="", date="") => {
   try {
     const response = await fetch(
-     `https://clear-fashion-topaz-seven.vercel.app/products/search/?brand=${brand}&order=${descOrder}&gender=${gender}`
+     `https://clear-fashion-topaz-seven.vercel.app/products/search/?brand=${brand}&order=${descOrder}&gender=${gender}&date=${date}&price=${price}`
     );
     const body = await response.json();
   
@@ -207,7 +210,7 @@ function nextPage(){
   if(currentPagination.page+1<=currentPagination.pageCount){
   currentPagination.page ++;
 
-  const p5 = paginate(currentProducts, currentPagination.pageSize, currentPagination.page);
+  const p5 = paginate(currentProducts, currentPagination.pageSize, currentPagination.page, currentPagination);
   setCurrentProducts(currentProducts, currentPagination.pageCount, currentPagination.page, currentPagination.pageSize);
 
   renderProducts(p5);
@@ -288,7 +291,7 @@ selectBrand.addEventListener('change', async (event) => {
   console.log(brand)
   selectors.brand = brand;
 
-  let products = await fetchProducts(selectors.brand, selectors.descOrder, selectors.gender);
+  let products = await fetchProducts(selectors.brand, selectors.descOrder, selectors.gender, selectors.date, selectors.price);
 
   console.log(products)
   const p5 = paginate(products, currentPagination.pageSize, 1);
@@ -306,7 +309,7 @@ selectGender.addEventListener('change', async (event) => {
   console.log(gender)
   selectors.gender = gender;
 
-  let products = await fetchProducts(selectors.brand, selectors.descOrder, selectors.gender);
+  let products = await fetchProducts(selectors.brand, selectors.descOrder, selectors.gender, selectors.date, selectors.price);
   
   console.log(products)
   const p5 = paginate(products, currentPagination.pageSize, 1);
@@ -324,7 +327,43 @@ selectSort.addEventListener('change', async (event) => {
   console.log(sort)
   selectors.descOrder = sort;
 
-  let products = await fetchProducts(selectors.brand, selectors.descOrder, selectors.gender);
+  let products = await fetchProducts(selectors.brand, selectors.descOrder, selectors.gender, selectors.date, selectors.price);
+  
+  console.log(products)
+  const p5 = paginate(products, currentPagination.pageSize, 1);
+  const pagecount = calculatePagesCount(currentPagination.pageSize, products.length)
+
+  setCurrentProducts(products, pagecount, 1, currentPagination.pageSize);
+
+  renderProducts(p5);
+
+  showPageInfo();
+});
+
+selectReasonable.addEventListener('change', async (event) => {
+  const price = event.target.value;
+  console.log(price)
+  selectors.price = price;
+
+  let products = await fetchProducts(selectors.brand, selectors.descOrder, selectors.gender, selectors.date, selectors.price);
+  
+  console.log(products)
+  const p5 = paginate(products, currentPagination.pageSize, 1);
+  const pagecount = calculatePagesCount(currentPagination.pageSize, products.length)
+
+  setCurrentProducts(products, pagecount, 1, currentPagination.pageSize);
+
+  renderProducts(p5);
+
+  showPageInfo();
+});
+
+selectRecently.addEventListener('change', async (event) => {
+  const date = event.target.value;
+  console.log(date)
+  selectors.date = date;
+
+  let products = await fetchProducts(selectors.brand, selectors.descOrder, selectors.gender, selectors.date, selectors.price);
   
   console.log(products)
   const p5 = paginate(products, currentPagination.pageSize, 1);

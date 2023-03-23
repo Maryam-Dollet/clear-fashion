@@ -172,8 +172,8 @@ app.get('/products/search/', async (request, response) => {
   if(brand){
     filter.brand = brand;
   }
-  if(price){
-    filter.price = {$lte : price};
+  if(price=="true"){
+    filter.price = {$lte : 50};
 
   }
   if(gender){
