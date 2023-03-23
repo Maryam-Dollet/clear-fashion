@@ -26,6 +26,32 @@ async function getAll(){
 }
 */
 
+function getToday(date = new Date()){
+  //var today = new Date();
+  var dd = date.getDate();
+
+  var mm = date.getMonth()+1; 
+  var yyyy = date.getFullYear();
+
+  if(dd<10) 
+  {
+      dd='0'+dd;
+  } 
+
+  if(mm<10) 
+  {
+      mm='0'+mm;
+  } 
+  today = yyyy+'-'+mm+'-'+dd;
+
+  return today;
+}
+
+function removeTwoWeeks(date = new Date()) {
+  date.setDate(date.getDate() - 7 * 3);
+  return date;
+}
+
 async function getBrands(){
   const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
   const db =  client.db(MONGODB_DB_NAME)
@@ -128,6 +154,7 @@ app.get('/products/search/', async (request, response) => {
   const order = request.query.order;
   const price = parseInt(request.query.price);
   const gender = request.query.gender;
+  const date = request.query.date;
   var limit = parseInt(request.query.limit);
 
   let filter = {};
@@ -151,6 +178,9 @@ app.get('/products/search/', async (request, response) => {
   }
   if(gender){
     filter.gender = gender;
+  }
+  if(date=="true"){
+    filter.date = {$lte: getToday(), $gte: getToday(removeTwoWeeks())}
   }
   
   const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
