@@ -152,7 +152,7 @@ app.get('/products/search/', async (request, response) => {
 
   const brand = request.query.brand;
   const order = request.query.order;
-  const price = parseInt(request.query.price);
+  const price = request.query.price;
   const gender = request.query.gender;
   const date = request.query.date;
   var limit = parseInt(request.query.limit);

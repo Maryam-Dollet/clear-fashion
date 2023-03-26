@@ -28,7 +28,7 @@ function getToday(date = new Date()){
 }
 
 function removeTwoWeeks(date = new Date()) {
-    date.setDate(date.getDate() - 7 * 2);
+    date.setDate(date.getDate() - 7 * 3);
     return date;
   }
 
@@ -139,6 +139,25 @@ async function selectDate(){
 
 }
 
+async function selectPrice(){
+    const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
+    const db =  client.db(MONGODB_DB_NAME)
+
+    const collection = db.collection('products');
+
+    var query = {}
+    query.price = {$lte: 50}
+    query.date = {$lte: getToday(), $gte: getToday(removeTwoWeeks())}
+    query.brand = "dedicated"
+    query.gender = "men"
+    var sort = { price: -1 }
+    const prods = await collection.find(query).sort(sort).toArray();
+
+    console.log(prods);
+    client.close();
+
+}
+
 async function getNumberProd(){
   
     const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
@@ -163,6 +182,8 @@ async function getNumberProd(){
 //dateSort();
 
 //selectDate()
+
+selectPrice()
 
 //getAll()
 //getId(new ObjectId("640756635a26b02b4e49f06d"))
