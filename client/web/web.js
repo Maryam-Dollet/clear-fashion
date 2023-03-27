@@ -374,7 +374,7 @@ selectRecently.addEventListener('change', async (event) => {
 // Load Page //
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const products = await fetchProducts(selectors.brand, selectors.descOrder, selectors.gender, selectors.date, selectors.price);
+  let products = await fetchProducts(selectors.brand, selectors.descOrder, selectors.gender, selectors.date, selectors.price);
   const nbprods = await fetchCount();
 
   const p5 = paginate(products, 12, 1);
