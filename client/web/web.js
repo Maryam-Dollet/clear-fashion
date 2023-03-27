@@ -205,7 +205,7 @@ function nextPage(){
   if(currentPagination.page+1<=currentPagination.pageCount){
   currentPagination.page ++;
 
-  const p5 = paginate(currentProducts, currentPagination.pageSize, currentPagination.page, currentPagination);
+  const p5 = paginate(currentProducts, currentPagination.pageSize, currentPagination.page);
   setCurrentProducts(currentProducts, currentPagination.pageCount, currentPagination.page, currentPagination.pageSize);
 
   renderProducts(p5);
