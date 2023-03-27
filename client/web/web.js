@@ -42,12 +42,7 @@ const setCurrentBrands = (result) => {
   currentBrands = result;
 }
 
-/**
- * Fetch products from api
- * @param  {Number}  [page=1] - current page to fetch
- * @param  {Number}  [size=12] - size of the page
- * @return {Object}
- */
+
 const fetchProducts = async (brand = "", descOrder="", gender="", price="", date="") => {
   try {
     const response = await fetch(
