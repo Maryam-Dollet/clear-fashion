@@ -18,8 +18,8 @@ const selectBrand = document.querySelector('#brand-select');
 const selectGender = document.querySelector('#gender-select');
 const selectSort = document.querySelector('#sort-select');
 
-const selectReasonable = document.querySelector('#reasonable-price')
-const selectRecently = document.querySelector('#recently-released')
+const selectReasonable = document.querySelector('#reasonable-price');
+const selectRecently = document.querySelector('#recently-released');
 
 var spanNbProducts = document.querySelector('#nbProducts');
 var numberOfBrands = document.getElementById("nbBrands");
