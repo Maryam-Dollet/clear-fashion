@@ -158,8 +158,11 @@ app.get('/products/search/', async (request, response) => {
   var limit = parseInt(request.query.limit);
 
   let filter = {};
-  let sort = { price: 1 }
+  let sort = {};
   if(order == "true"){
+    sort = { price: 1 }
+  }
+  if(order == "false"){
     sort =  { price: -1 }
   }
   if(order == "asc"){
