@@ -201,6 +201,6 @@ app.get('/products/:id', async (request, response) => {
 
 
 
-app.listen(PORT);
+//app.listen(PORT);
 
-console.log(`📡 Running on port ${PORT}`)
+//console.log(`📡 Running on port ${PORT}`)
