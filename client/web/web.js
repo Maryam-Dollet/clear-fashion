@@ -9,6 +9,8 @@ let currentBrands = [];
 let selectors = {brand: "", descOrder:"", gender:"", price:"", date:""};
 //let count = {}
 
+let favoriteProducts = getLocalStorage();
+
 // instantiate the selectors
 const sectionBrands = document.querySelector('#brands');
 const sectionProducts = document.querySelector('#products');
@@ -98,7 +100,7 @@ const renderProducts = products => {
   const template = products
     .map(product => {
       return `
-      <div class="product" data-id=${product._id}>
+      <div class="product">
         <div class="resize">
           <img src=${product.image}>
         </div>
@@ -107,6 +109,11 @@ const renderProducts = products => {
             <a href="${product.link}" target="_blank" rel="noopener noreferrer">${product.name}</a><br>
             <span>price : ${product.price} €</span><br>
             <span>release date : <span class="date">${product.date}</span></span>
+            <div>
+              <button class="fav-btn" id=${product._id} type="button" onclick="manageFavorites(this.id)">
+                <i class="fas fa-heart"></i>
+              </button>
+            </div>
         </div>
       </div>
      `;
@@ -121,7 +128,15 @@ const renderProducts = products => {
   pdiv.className = "products-center";
   pdiv.appendChild(div);
   sectionProducts.appendChild(pdiv);
-  console.log(pdiv);
+  //console.log(pdiv);
+  // check if product id is in favorite if yes the fav-button is red
+  const localfavs = getLocalStorage()
+  localfavs.forEach(element => {
+    if(document.getElementById(element.id)){
+      console.log(document.getElementById(element.id));
+      document.getElementById(element.id).style.color = "red";
+    }
+  });
 };
 
 const renderBrands = brands => {
@@ -198,26 +213,54 @@ const Pvalues = async(prods) =>{
 }
 
 //Favorite products
-
-//get favorite products from local storage and put into a list 
-function getLocalStorage(){
-  return localStorage.getItem("list")?JSON.parse(localStorage.getItem('list')) : [];
-}
-
 //add favorite product to localStorage
-function addToFavorites(id){
+function manageFavorites(id){
   if(favoriteProducts.some(product => product.id === id)){
-    alert('Product already in your favorites')
+    alert('Product removed')
+    var fav = currentProducts.find(item => item._id === id);
+    removeFromLocalStorage(fav._id);
+    const favBtn = document.getElementById(fav._id);
+    favBtn.style.color = "black";
+    favoriteProducts = getLocalStorage();
   }
   else{
     alert("Product added");
-    currentProducts.find(item => item.id === id).favorite = true
-    var fav = currentProducts.find(item => item.uuid === id);
-    favoriteProducts.push(fav);
+    // currentProducts.find(item => item.id === id).favorite = true
+    var fav = currentProducts.find(item => item._id === id);
+    console.log(fav)
+    addToLocalStorage(fav._id);
+    const favBtn = document.getElementById(fav._id);
+    favBtn.style.color = "red";
+    favoriteProducts = getLocalStorage();
   }
 }
+
+// Local Storage 
+//get favorite products from local storage and put into a list 
+function getLocalStorage(){
+  return localStorage.getItem("prods")?JSON.parse(localStorage.getItem('prods')) : [];
+}
+
+function addToLocalStorage(id){
+  const prod = {id:id};
+  //console.log(grocery);
+  let items = getLocalStorage();
+  
+  items.push(prod);
+  localStorage.setItem('prods', JSON.stringify(items));
+  // console.log(items);
+}
+
 //remove favorite product from local storage 
-//set favorite products with id 
+function removeFromLocalStorage(id){
+  let items = getLocalStorage();
+  items = items.filter(function(item){
+      if(item.id !== id){
+          return item
+      }
+  });
+  localStorage.setItem('prods', JSON.stringify(items));
+}
 
 // Calculate pagination //
 

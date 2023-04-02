@@ -19,6 +19,10 @@ nav{
     color:#ffffff;
     font-size: 3rem;
 }
+.nav-center p{
+    color: #ffffff;
+    text-align: center;
+}
 
 .fixed-nav {
     position: fixed;
@@ -141,4 +145,13 @@ select {
     /* margin: 10px; */
     font-size: 2rem;
     text-transform: capitalize;
+}
+
+.fav-btn{
+    color:black;
+    text-align: center;
+    background: transparent;
+    place-items: center;
+    border-radius: 0.5rem;
+    font-size: 1.25rem;
 }
