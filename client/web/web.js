@@ -29,6 +29,10 @@ var p90 = document.getElementById("p90");
 var p95 = document.getElementById("p95");
 var recentDate = document.getElementById("recent-date");
 
+//navbar
+const navbar = document.getElementById('nav');
+const navHeight = navbar.getBoundingClientRect().height;
+
 const setCurrentProducts = (result, pagecount, page, pagesize) => {
   currentProducts = result;
   currentPagination.pageCount = pagecount;
@@ -89,22 +93,20 @@ const fetchBrands = async () => {
 };
 
 const renderProducts = products => {
-  const fragment = document.createDocumentFragment();
   const div = document.createElement('div');
+  div.className = "products-container";
   const template = products
     .map(product => {
       return `
-      <div class="product" id=${product._id}>
-        <div class="col">
+      <div class="product" data-id=${product._id}>
+        <div class="resize">
           <img src=${product.image}>
         </div>
         <div class="col">
-          <pre>
-            <span class="underline"><font size="+3">${product.brand}</font></span>
-            <a href="${product.link}" target="_blank" rel="noopener noreferrer">${product.name}</a>
-            price : ${product.price} €
-            release date : <span class="date">${product.date}</span>
-          </pre>
+            <span class="underline">${product.brand}</span><br>
+            <a href="${product.link}" target="_blank" rel="noopener noreferrer">${product.name}</a><br>
+            <span>price : ${product.price} €</span><br>
+            <span>release date : <span class="date">${product.date}</span></span>
         </div>
       </div>
      `;
@@ -112,18 +114,24 @@ const renderProducts = products => {
     .join('');
 
   div.innerHTML = template;
-  fragment.appendChild(div);
-  sectionProducts.innerHTML = '<h2>Products</h2>';
-  sectionProducts.appendChild(fragment);
+  sectionProducts.innerHTML = `<div class="title">
+                                <h2>Products</h2>
+                              </div>`;
+  const pdiv = document.createElement('div');
+  pdiv.className = "products-center";
+  pdiv.appendChild(div);
+  sectionProducts.appendChild(pdiv);
+  console.log(pdiv);
 };
 
 const renderBrands = brands => {
   const fragment = document.createDocumentFragment();
   const div = document.createElement('div');
-  const template = brands
+  div.className = "brands-container";
+  const template = brands.slice(1)
     .map(brand => {
       return `
-      <div>
+      <div class="brand">
         ${brand}
       </div>
      `;
@@ -132,7 +140,9 @@ const renderBrands = brands => {
 
   div.innerHTML = template;
   fragment.appendChild(div);
-  sectionBrands.innerHTML = '<h2>Brands</h2>';
+  sectionBrands.innerHTML = `<div class="title">
+                              <h2>Brands</h2>
+                            </div>`;
   sectionBrands.appendChild(fragment);
 
   const options = Array.from(brands, x => `<option value="${x}">${x}</option>`);
@@ -211,7 +221,7 @@ function nextPage(){
   renderProducts(p5);
 
   showPageInfo();
-  sectionProducts.scrollIntoView({ behavior: "smooth" })
+  sectionBrands.scrollIntoView({ behavior: "smooth" })
   }
 }
 
@@ -225,7 +235,7 @@ function previous(){
   renderProducts(p5);
 
   showPageInfo();
-  sectionProducts.scrollIntoView({ behavior: "smooth" })
+  sectionBrands.scrollIntoView({ behavior: "smooth" })
   }
 }
 
@@ -239,7 +249,7 @@ function firstPage(){
   renderProducts(p5);
 
   showPageInfo();
-  sectionProducts.scrollIntoView({ behavior: "smooth" })
+  sectionBrands.scrollIntoView({ behavior: "smooth" })
   }
 }
 
@@ -253,7 +263,7 @@ function lastPage(){
   renderProducts(p5);
 
   showPageInfo();
-  sectionProducts.scrollIntoView({ behavior: "smooth" })
+  sectionBrands.scrollIntoView({ behavior: "smooth" })
   }
 }
 
@@ -370,6 +380,20 @@ selectRecently.addEventListener('change', async (event) => {
 
   showPageInfo();
 });
+
+//navbar
+
+window.addEventListener('scroll', function(){
+    //console.log(window.pageYOffset);
+    const scrollHeight = window.pageYOffset;
+    const navheight = navbar.getBoundingClientRect().height;
+    if(scrollHeight > navheight){
+        navbar.classList.add('fixed-nav');
+    }
+    else{
+        navbar.classList.remove('fixed-nav');
+    }
+})
 
 // Load Page //
 
