@@ -33,7 +33,9 @@ nav{
 }
 .link a:hover {
     text-decoration: underline;
-  }
+    color: #ffffff;
+
+}
 
 .fixed-nav {
     position: fixed;
