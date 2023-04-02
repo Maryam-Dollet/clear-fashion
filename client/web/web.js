@@ -9,6 +9,8 @@ let currentBrands = [];
 let selectors = {brand: "", descOrder:"", gender:"", price:"", date:""};
 //let count = {}
 
+let favoriteProducts = [];
+
 // instantiate the selectors
 const sectionBrands = document.querySelector('#brands');
 const sectionProducts = document.querySelector('#products');
@@ -196,6 +198,30 @@ const Pvalues = async(prods) =>{
   p90.innerHTML = p_value(prods, 90);
   p95.innerHTML = p_value(prods, 95);
 }
+
+//Favorite products
+
+//get favorite products from local storage and put into a list 
+function getLocalStorage(){
+  return localStorage.getItem("list")?JSON.parse(localStorage.getItem('list')) : [];
+}
+
+//add favorite product to localStorage
+function addToFavorites(id){
+  if(favoriteProducts.some(product => product.id === id)){
+    alert('Product already in your favorites')
+  }
+  else{
+    alert("Product added");
+    currentProducts.find(item => item.id === id).favorite = true
+    var fav = currentProducts.find(item => item.uuid === id);
+    favoriteProducts.push(fav);
+  }
+}
+//remove favorite product from local storage 
+
+
+//set favorite products with id 
 
 // Calculate pagination //
 
