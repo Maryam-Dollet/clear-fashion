@@ -9,8 +9,6 @@ let currentBrands = [];
 let selectors = {brand: "", descOrder:"", gender:"", price:"", date:""};
 //let count = {}
 
-let favoriteProducts = [];
-
 // instantiate the selectors
 const sectionBrands = document.querySelector('#brands');
 const sectionProducts = document.querySelector('#products');
@@ -109,6 +107,9 @@ const renderProducts = products => {
             <a href="${product.link}" target="_blank" rel="noopener noreferrer">${product.name}</a><br>
             <span>price : ${product.price} €</span><br>
             <span>release date : <span class="date">${product.date}</span></span>
+            <div class="favorite-check">
+              <button id=${product.id} type="button" onclick="addToFavorites(this.id)">Add to favorites</button>
+            </div>
         </div>
       </div>
      `;
@@ -219,8 +220,6 @@ function addToFavorites(id){
   }
 }
 //remove favorite product from local storage 
-
-
 //set favorite products with id 
 
 // Calculate pagination //
