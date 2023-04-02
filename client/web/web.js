@@ -107,9 +107,6 @@ const renderProducts = products => {
             <a href="${product.link}" target="_blank" rel="noopener noreferrer">${product.name}</a><br>
             <span>price : ${product.price} €</span><br>
             <span>release date : <span class="date">${product.date}</span></span>
-            <div class="favorite-check">
-              <button id=${product.id} type="button" onclick="addToFavorites(this.id)">Add to favorites</button>
-            </div>
         </div>
       </div>
      `;
