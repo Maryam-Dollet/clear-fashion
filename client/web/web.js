@@ -132,9 +132,9 @@ const renderProducts = products => {
   // check if product id is in favorite if yes the fav-button is red
   const localfavs = getLocalStorage()
   localfavs.forEach(element => {
-    if(document.getElementById(element.id)){
-      console.log(document.getElementById(element.id));
-      document.getElementById(element.id).style.color = "red";
+    if(document.getElementById(element._id)){
+      console.log(document.getElementById(element._id));
+      document.getElementById(element._id).style.color = "red";
     }
   });
 };
@@ -215,7 +215,7 @@ const Pvalues = async(prods) =>{
 //Favorite products
 //add favorite product to localStorage
 function manageFavorites(id){
-  if(favoriteProducts.some(product => product.id === id)){
+  if(favoriteProducts.some(product => product._id === id)){
     alert('Product removed')
     var fav = currentProducts.find(item => item._id === id);
     removeFromLocalStorage(fav._id);
@@ -228,7 +228,7 @@ function manageFavorites(id){
     // currentProducts.find(item => item.id === id).favorite = true
     var fav = currentProducts.find(item => item._id === id);
     console.log(fav)
-    addToLocalStorage(fav._id);
+    addToLocalStorage(fav);
     const favBtn = document.getElementById(fav._id);
     favBtn.style.color = "red";
     favoriteProducts = getLocalStorage();
@@ -242,7 +242,7 @@ function getLocalStorage(){
 }
 
 function addToLocalStorage(id){
-  const prod = {id:id};
+  const prod = id;
   //console.log(grocery);
   let items = getLocalStorage();
   
@@ -254,8 +254,9 @@ function addToLocalStorage(id){
 //remove favorite product from local storage 
 function removeFromLocalStorage(id){
   let items = getLocalStorage();
+  console.log(items)
   items = items.filter(function(item){
-      if(item.id !== id){
+      if(item._id !== id){
           return item
       }
   });

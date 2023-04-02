@@ -19,9 +19,17 @@ nav{
     color:#ffffff;
     font-size: 3rem;
 }
-.nav-center p{
-    color: #ffffff;
+.link{
     text-align: center;
+    top:1rem;
+}
+.link a{
+    color: #eec4d1;
+    font-size: 2rem;
+    text-transform: capitalize;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 1rem;
 }
 
 .fixed-nav {
@@ -124,7 +132,7 @@ h2{
 }
 
 #indicators, #options{
-    font-size: 1.5rem;
+    font-size: 2rem;
 }
 
 footer {
@@ -141,9 +149,9 @@ footer p {
 
 select {
     width:auto;
-    height: auto;
+    height: 40px;
     /* margin: 10px; */
-    font-size: 1.5rem;
+    font-size: 2rem;
     text-transform: capitalize;
 }
 
