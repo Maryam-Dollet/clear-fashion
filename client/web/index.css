@@ -141,7 +141,7 @@ footer p {
 
 select {
     width:auto;
-    height: 40px;
+    height: auto;
     /* margin: 10px; */
     font-size: 1.5rem;
     text-transform: capitalize;
