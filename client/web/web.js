@@ -50,7 +50,7 @@ const setCurrentBrands = (result) => {
 const fetchProducts = async (brand = "", descOrder="", gender="", price="", date="") => {
   try {
     const response = await fetch(
-     `https://clear-fashion-topaz-seven.vercel.app/products/search/?brand=${brand}&order=${descOrder}&gender=${gender}&date=${date}&price=${price}`
+     `https://clear-fashion-topaz-seven-api.vercel.app/products/search/?brand=${brand}&order=${descOrder}&gender=${gender}&date=${date}&price=${price}`
     );
     const body = await response.json();
   
