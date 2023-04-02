@@ -65,7 +65,7 @@ const fetchProducts = async (brand = "", descOrder="", gender="", price="", date
 const fetchCount = async () => {
   try {
     const response = await fetch(
-      `https://clear-fashion-topaz-seven.vercel.app/products/count`
+      `https://clear-fashion-topaz-seven-api.vercel.app/products/count`
     );
     const body = await response.json();
 
@@ -80,7 +80,7 @@ const fetchCount = async () => {
 const fetchBrands = async () => {
   try {
     const response = await fetch(
-      `https://clear-fashion-topaz-seven.vercel.app/brands`
+      `https://clear-fashion-topaz-seven-api.vercel.app/brands`
     );
     const body = await response.json();
 
