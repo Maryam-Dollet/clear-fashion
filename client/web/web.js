@@ -212,7 +212,7 @@ const Pvalues = async(prods) =>{
   p95.innerHTML = p_value(prods, 95);
 }
 
-//Favorite products
+// Favorite products //
 //add favorite product to localStorage
 function manageFavorites(id){
   if(favoriteProducts.some(product => product._id === id)){
@@ -227,7 +227,7 @@ function manageFavorites(id){
     alert("Product added");
     // currentProducts.find(item => item.id === id).favorite = true
     var fav = currentProducts.find(item => item._id === id);
-    console.log(fav)
+    // console.log(fav)
     addToLocalStorage(fav);
     const favBtn = document.getElementById(fav._id);
     favBtn.style.color = "red";
@@ -254,7 +254,7 @@ function addToLocalStorage(id){
 //remove favorite product from local storage 
 function removeFromLocalStorage(id){
   let items = getLocalStorage();
-  console.log(items)
+  // console.log(items)
   items = items.filter(function(item){
       if(item._id !== id){
           return item

@@ -56,7 +56,7 @@ const renderProducts = products => {
     const localfavs = getLocalStorage()
     localfavs.forEach(element => {
       if(document.getElementById(element._id)){
-        console.log(document.getElementById(element._id));
+        // console.log(document.getElementById(element._id));
         document.getElementById(element._id).style.color = "red";
       }
     });
@@ -76,12 +76,53 @@ window.addEventListener('scroll', function(){
     }
 })
 
+// Favorite products //
+//add favorite product to localStorage
+function manageFavorites(id){
+    if(currentProducts.some(product => product._id === id)){
+        alert('Product removed')
+        var fav = currentProducts.find(item => item._id === id);
+        removeFromLocalStorage(fav._id);
+        const favBtn = document.getElementById(fav._id);
+        favBtn.style.color = "black";
+        const favoriteProducts = getLocalStorage();
+        const p5 = paginate(favoriteProducts, currentPagination.pageSize, currentPagination.page);
+        setCurrentProducts(favoriteProducts, currentPagination.pageCount, currentPagination.page, currentPagination.pageSize);
+
+        renderProducts(p5);
+
+        showPageInfo();
+    }
+    else{
+        alert("Product added");
+        // currentProducts.find(item => item.id === id).favorite = true
+        var fav = currentProducts.find(item => item._id === id);
+        //   console.log(fav)
+        addToLocalStorage(fav);
+        const favBtn = document.getElementById(fav._id);
+        favBtn.style.color = "red";
+        favoriteProducts = getLocalStorage();
+    }
+  }
+
 // Local Storage //
 //get favorite products from local storage and put into a list 
 function getLocalStorage(){
     return localStorage.getItem("prods")?JSON.parse(localStorage.getItem('prods')) : [];
   }
 
+
+//remove favorite product from local storage 
+function removeFromLocalStorage(id){
+    let items = getLocalStorage();
+    console.log(items)
+    items = items.filter(function(item){
+        if(item._id !== id){
+            return item
+        }
+    });
+    localStorage.setItem('prods', JSON.stringify(items));
+  }
 // Calculate pagination //
 
 function paginate(array, page_size, page_number) {
