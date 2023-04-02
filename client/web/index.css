@@ -31,6 +31,9 @@ nav{
     text-decoration: none;
     padding: 1rem;
 }
+.link a:hover {
+    text-decoration: underline;
+  }
 
 .fixed-nav {
     position: fixed;
