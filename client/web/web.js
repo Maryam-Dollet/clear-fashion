@@ -55,7 +55,7 @@ const fetchProducts = async (brand = "", descOrder="", gender="", price="", date
      `https://clear-fashion-topaz-seven-api.vercel.app/products/search/?brand=${brand}&order=${descOrder}&gender=${gender}&date=${date}&price=${price}`
     );
     const body = await response.json();
-    console.log(body)
+    
     return body;
 
     } catch (error) {
@@ -421,7 +421,7 @@ selectReasonable.addEventListener('change', async (event) => {
 
   let products = await fetchProducts(selectors.brand, selectors.descOrder, selectors.gender, selectors.price, selectors.date);
   
-  console.log(products);
+  //console.log(products);
   const p5 = paginate(products, currentPagination.pageSize, 1);
   const pagecount = calculatePagesCount(currentPagination.pageSize, products.length);
 
