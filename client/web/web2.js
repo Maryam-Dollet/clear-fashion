@@ -28,10 +28,12 @@ const renderProducts = products => {
             <img src=${product.image}>
           </div>
           <div class="col">
-              <span class="underline">${product.brand}</span><br>
-              <a href="${product.link}" target="_blank" rel="noopener noreferrer">${product.name}</a><br>
-              <span>price : ${product.price} €</span><br>
-              <span>release date : <span class="date">${product.date}</span></span>
+            <div class="underline">${product.brand}</div>
+            <div>
+                <a href="${product.link}" target="_blank" rel="noopener noreferrer">${product.name}</a>
+            </div>
+            <div>price : ${product.price} €</div>
+            <div>release date : <span class="date">${product.date}</span></div>
               <div>
                 <button class="fav-btn" id=${product._id} type="button" onclick="manageFavorites(this.id)">
                   <i class="fas fa-heart"></i>

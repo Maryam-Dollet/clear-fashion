@@ -31,10 +31,10 @@ nav{
     text-decoration: none;
     padding: 1rem;
 }
+
 .link a:hover {
     text-decoration: underline;
     color: #ffffff;
-
 }
 
 .fixed-nav {
@@ -131,8 +131,8 @@ h2{
     height: auto;
 }
 
-.col{
-    padding: 2em;
+.col div{
+    padding: 2px;
     
 }
 
