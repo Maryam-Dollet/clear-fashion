@@ -125,6 +125,7 @@ const renderProducts = products => {
   div.innerHTML = template;
   sectionProducts.innerHTML = `<div class="title">
                                 <h2>Products</h2>
+                                <h3>Number of products : ${products.length}</h3>
                               </div>`;
   const pdiv = document.createElement('div');
   pdiv.className = "products-center";
