@@ -218,7 +218,7 @@ const Pvalues = async(prods) =>{
 //add favorite product to localStorage
 function manageFavorites(id){
   if(favoriteProducts.some(product => product._id === id)){
-    alert('Product removed')
+    alert('Product removed from favorites')
     var fav = currentProducts.find(item => item._id === id);
     removeFromLocalStorage(fav._id);
     const favBtn = document.getElementById(fav._id);
@@ -226,7 +226,7 @@ function manageFavorites(id){
     favoriteProducts = getLocalStorage();
   }
   else{
-    alert("Product added");
+    alert("Product added to favorites");
     // currentProducts.find(item => item.id === id).favorite = true
     var fav = currentProducts.find(item => item._id === id);
     // console.log(fav)
