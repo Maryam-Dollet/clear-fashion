@@ -171,7 +171,7 @@ const renderBrands = brands => {
 // Filters //
 
 const filterRecentProducts = products => {
-  const filteredprods = products.filter(product => (dateToday - new Date(product.date))/(1000*60*60*24) <= 20);
+  const filteredprods = products.filter(product => (dateToday - new Date(product.date))/(1000*60*60*24) <= 30);
   return filteredprods;
 };
 
