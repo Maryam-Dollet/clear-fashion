@@ -55,7 +55,7 @@ const fetchProducts = async (brand = "", descOrder="", gender="", price="", date
      `https://clear-fashion-topaz-seven-api.vercel.app/products/search/?brand=${brand}&order=${descOrder}&gender=${gender}&date=${date}&price=${price}`
     );
     const body = await response.json();
-  
+    console.log(body)
     return body;
 
     } catch (error) {
@@ -136,7 +136,7 @@ const renderProducts = products => {
   const localfavs = getLocalStorage()
   localfavs.forEach(element => {
     if(document.getElementById(element._id)){
-      console.log(document.getElementById(element._id));
+      //console.log(document.getElementById(element._id));
       document.getElementById(element._id).style.color = "red";
     }
   });
@@ -416,7 +416,7 @@ selectSort.addEventListener('change', async (event) => {
 
 selectReasonable.addEventListener('change', async (event) => {
   const price = event.target.value;
-  console.log(price)
+  console.log(price);
   selectors.price = price;
 
   let products = await fetchProducts(selectors.brand, selectors.descOrder, selectors.gender, selectors.date, selectors.price);
